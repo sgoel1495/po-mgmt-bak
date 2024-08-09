@@ -1,0 +1,24 @@
+type Opening {
+    id: ID,
+    name: String,
+    suggestedRate: Rate,
+    candidates: [Candidate]
+}
+
+input OpeningInput {
+    name: String,
+    suggestedRate: RateInput,
+}
+
+type PaginatedOpening {
+    results: [Opening!]
+    total: Int
+}
+extend type Query {
+    opening(id:ObjectID): Opening!
+}
+
+extend type Mutation {
+    addOpening(data: OpeningInput!, vendorId: String!): ObjectID
+}
+

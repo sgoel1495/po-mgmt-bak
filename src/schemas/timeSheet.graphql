@@ -1,0 +1,44 @@
+type DayTime {
+    date: Date,
+    standardHours: Int,
+    OTHours: Int
+}
+
+input DayTimeInput {
+    date: Date,
+    standardHours: Int,
+    OTHours: Int
+}
+
+enum TimeSheetStatus {
+    SUBMITTED
+    APPROVED
+}
+
+type TimeSheet {
+    id: ID,
+    candidate: Candidate,
+    month: Int,
+    timeSheet: [DayTime!],
+    submissionDate: Date,
+    approvalDate: Date,
+    status: TimeSheetStatus
+}
+
+input TimeSheetInput {
+    id: ID,
+    candidate: ObjectID,
+    month: Int,
+    timeSheet: [DayTimeInput!],
+    submissionDate: Date,
+    approvalDate: Date,
+    status: TimeSheetStatus
+}
+
+extend type Query {
+    getTimeSheet(month:Int, candidate: ID): TimeSheet
+}
+
+extend type Mutation {
+    updateTimeSheet(data:TimeSheetInput): String
+}

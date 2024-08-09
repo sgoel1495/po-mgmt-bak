@@ -1,0 +1,44 @@
+type Vendor {
+    id: ID,
+    name: String,
+    vendorId: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String,
+    einNumber: String,
+    authSignName: String,
+    authSignEmail: EmailAddress,
+    authSignDesig: String,
+    paymentTerms: Int,
+    bank: Bank,
+    company: Company!
+    openings: [Opening!]
+}
+
+input VendorInput {
+    name: String,
+    vendorId: String,
+    einNumber: String,
+    paymentTerms: Int,
+    company: ObjectID,
+    authSignName: String,
+    authSignEmail: EmailAddress,
+    authSignDesig: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String,
+    bank: BankInput,
+}
+
+type PaginatedVendor {
+    results: [Vendor!]
+    total: Int
+}
+extend type Query {
+    vendors(pageNum: Int, pageSize: Int): PaginatedVendor!
+    vendor(id:ObjectID): Vendor
+}
+
+extend type Mutation {
+    addVendor(data: VendorInput): ObjectID
+}

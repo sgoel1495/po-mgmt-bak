@@ -1,0 +1,42 @@
+type Person {
+    name: String,
+    email: EmailAddress,
+    phone: PhoneNumber
+}
+
+
+input PersonInput {
+    name: String,
+    email: EmailAddress,
+    phone: PhoneNumber
+}
+
+type Rate {
+    rate: Int,
+    otRate: Int,
+}
+
+input RateInput {
+    rate: Int,
+    otRate: Int,
+}
+
+type Bank {
+    accountName: String,
+    accountNumber: String,
+    routingNumber: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String,
+    bankName: String
+}
+
+input BankInput {
+    accountName: String,
+    accountNumber: String,
+    routingNumber: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String,
+    bankName: String
+}

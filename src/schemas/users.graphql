@@ -1,0 +1,42 @@
+enum Roles {
+    Admin
+    User
+}
+
+type User {
+    username: String
+    password: String
+    role: Roles
+    createdAt: Date
+}
+
+input UserInput {
+    username: String!
+    password: String!
+    role: Roles
+}
+
+type Token {
+    accessToken: String
+}
+
+type PaginatedUsers {
+    results: [User!]
+    total: Int
+}
+
+type LoginResponse {
+    tokens: Token,
+    role: String
+}
+
+extend type Query {
+    login(username:String!, password: String!): LoginResponse
+    users(pageNum: Int, pageSize: Int): PaginatedUsers!
+}
+
+extend type Mutation {
+    addUser(data: UserInput!): String
+    deleteUser(username: String!): String
+    updateUser(username: String!, password: String, role: String!): String
+}
