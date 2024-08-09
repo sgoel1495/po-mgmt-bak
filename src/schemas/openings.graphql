@@ -1,12 +1,14 @@
 type Opening {
     id: ID,
     name: String,
+    endClient: String,
     suggestedRate: Rate,
     candidates: [Candidate]
 }
 
 input OpeningInput {
     name: String,
+    endClient: String,
     suggestedRate: RateInput,
 }
 
