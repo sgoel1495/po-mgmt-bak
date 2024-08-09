@@ -1,0 +1,9 @@
+/** 
+* Paste one or more documents here
+*/
+{
+  "username": "k123",
+  "salt": "dc4628a66737d6de5986344fe188b35fbc988866a94f39418d98b332704bf5e0",
+  "password": "e1bc4d228ddd52506047a23d8c62f9c824f2b1d712e12e916e3b15a616cdf067e37ab223b4dd360ca4b482528ff0f5e884ecedd7a522c2a43f176ee9d4c3c0b4",
+  "role": "Admin"
+}
