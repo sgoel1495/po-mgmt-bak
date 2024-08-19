@@ -1,36 +1,33 @@
 type Company {
     id: ObjectID,
     companyName: String,
-    logo: String,
-    signingAuthName: String,
-    signingAuthEmail: EmailAddress,
-    signingAuthDesignation: String,
+    ownerName: String,
     addressLine1: String,
     addressLine2: String,
-    addressLine3: String
+    addressLine3: String,
+    bank: Bank!,
 }
 
 input CompanyInput {
     companyName: String,
-    logo: String,
-    signingAuthName: String,
-    signingAuthEmail: EmailAddress,
-    signingAuthDesignation: String,
+    ownerName: String,
     addressLine1: String,
     addressLine2: String,
-    addressLine3: String
+    addressLine3: String,
+    bank: BankInput!,
 }
 
 type PaginatedCompany {
     results: [Company!]
     total: Int
 }
-type Query {
+extend type Query {
     companies(pageNum: Int, pageSize: Int): PaginatedCompany!
     company(id: ObjectID): Company
-    searchCompany(name: String): [Company]
+    searchCompany(name: String): [Client]
 }
 
-type Mutation {
+extend type Mutation {
     addCompany(data: CompanyInput): ObjectID
+    updateCompany(data: CompanyInput, id: String): String
 }

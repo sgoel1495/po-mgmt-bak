@@ -3,7 +3,7 @@ type Opening {
     name: String,
     endClient: String,
     suggestedRate: Rate,
-    candidates: [Candidate]
+    joinings: [Joining]
 }
 
 input OpeningInput {
@@ -22,5 +22,6 @@ extend type Query {
 
 extend type Mutation {
     addOpening(data: OpeningInput!, vendorId: String!): ObjectID
+    updateOpening(data: OpeningInput!, openingId: String!): String
 }
 

@@ -1,54 +1,22 @@
 type Candidate {
     id: ObjectID,
     name: String,
-    joiningDate: Date,
-    vendorRate: Rate!,
-    candidateRate: Rate!,
-    paymentTerms: Int,
-    actualStartDate: Date,
     personalEmail: EmailAddress,
-    officialEmail: EmailAddress,
     contact: PhoneNumber,
-    manager: String,
-    empId: String,
+    timezone: String,
     addressLine1: String,
     addressLine2: String,
     addressLine3: String,
-    companyName: String,
-    vendorSpoc: Person!,
-    vendorAcctSpoc: Person!,
-    bank: Bank!,
-    company: Company,
-    vendor: Vendor,
-    projectName: String,
-    projectLocation: String,
-    timesheetApprover: Person
 }
 
 input CandidateInput {
-    empId: String,
     name: String,
-    joiningDate: Date,
-    actualStartDate: Date,
-    paymentTerms: Int,
     personalEmail: EmailAddress,
-    officialEmail: EmailAddress,
     contact: PhoneNumber,
-    manager: String,
+    timezone: String,
     addressLine1: String,
     addressLine2: String,
     addressLine3: String,
-    vendor: ObjectID
-    vendorSpoc: PersonInput!,
-    vendorAcctSpoc: PersonInput!,
-    vendorRate: RateInput!,
-    candidateRate: RateInput!,
-    company: ObjectID,
-    companyName: String,
-    bank: BankInput!,
-    projectName: String,
-    projectLocation: String,
-    timesheetApprover: PersonInput!
 }
 
 type PaginatedCandidate {
@@ -58,8 +26,10 @@ type PaginatedCandidate {
 extend type Query {
     candidates(pageNum: Int, pageSize: Int): PaginatedCandidate!
     candidate(id: ObjectID): Candidate
+    searchCandidate(name: String): [Candidate]
 }
 
 extend type Mutation {
-    addCandidate(data: CandidateInput, openingId: String): ObjectID
+    addCandidate(data: CandidateInput): ObjectID
+    updateCandidate(data: CandidateInput, id: String): String
 }

@@ -11,7 +11,7 @@ type Vendor {
     authSignDesig: String,
     paymentTerms: Int,
     bank: Bank,
-    company: Company!
+    client: Client!
     openings: [Opening!]
 }
 
@@ -20,7 +20,7 @@ input VendorInput {
     vendorId: String,
     einNumber: String,
     paymentTerms: Int,
-    company: ObjectID,
+    client: ObjectID,
     authSignName: String,
     authSignEmail: EmailAddress,
     authSignDesig: String,
@@ -41,4 +41,5 @@ extend type Query {
 
 extend type Mutation {
     addVendor(data: VendorInput): ObjectID
+    updateVendor(data: VendorInput, id: String): String
 }

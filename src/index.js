@@ -7,7 +7,7 @@ import {ApolloServer} from '@apollo/server';
 import {buildSubgraphSchema} from '@apollo/subgraph';
 import {expressMiddleware} from '@apollo/server/express4';
 import {readFileSync} from "fs";
-import {CompanyResolvers} from "./resolvers/companyResolvers.js";
+import {ClientResolvers} from "./resolvers/clientResolvers.js";
 import {VendorResolvers} from "./resolvers/vendorResolvers.js";
 import {CandidateResolvers} from "./resolvers/candidateResolvers.js";
 import {TimeSheetResolvers} from "./resolvers/timeSheetResolvers.js";
@@ -19,6 +19,8 @@ import {UsersResolvers} from "./resolvers/usersResolvers.js";
 import {AuthService} from "./helpers/authService.js";
 import {GraphQLError} from "graphql/error/index.js";
 import {startStandaloneServer} from "@apollo/server/standalone";
+import {CompanyResolvers} from "./resolvers/companyResolvers.js";
+import {JoiningResolvers} from "./resolvers/joiningResolver.js";
 //highlight-end
 
 const PORT = process.env.PORT || 5050;
@@ -28,8 +30,8 @@ app.use(cors());
 app.use(express.json());
 
 //highlight-start
-const companyTypeDefs = gql(
-    readFileSync("./src/schemas/company.graphql", {
+const clientTypeDefs = gql(
+    readFileSync("./src/schemas/client.graphql", {
         encoding: "utf-8",
     })
 );
@@ -69,18 +71,31 @@ const userTypeDefs = gql(
         encoding: "utf-8",
     })
 );
+const companyTypeDefs = gql(
+    readFileSync("./src/schemas/company.graphql", {
+        encoding: "utf-8",
+    })
+);
+
+const joiningTypeDefs = gql(
+    readFileSync("./src/schemas/joining.graphql", {
+        encoding: "utf-8",
+    })
+);
 
 
 const server = new ApolloServer({
     schema: buildSubgraphSchema([
         {typeDefs: gql(scalarTypeDefs.join('\n')), resolvers: scalarResolvers},
-        {typeDefs: companyTypeDefs, resolvers: CompanyResolvers},
+        {typeDefs: clientTypeDefs, resolvers: ClientResolvers},
         {typeDefs: vendorTypeDefs, resolvers: VendorResolvers},
         {typeDefs: candidateTypeDefs, resolvers: CandidateResolvers},
         {typeDefs: timeSheetTypeDefs, resolvers: TimeSheetResolvers},
         {typeDefs: commonTypeDefs, resolvers: CommonResolvers},
         {typeDefs: openingTypeDefs, resolvers: OpeningResolvers},
         {typeDefs: userTypeDefs, resolvers: UsersResolvers},
+        {typeDefs: companyTypeDefs, resolvers: CompanyResolvers},
+        {typeDefs: joiningTypeDefs, resolvers: JoiningResolvers},
     ]),
 });
 // Note you must call `start()` on the `ApolloServer`

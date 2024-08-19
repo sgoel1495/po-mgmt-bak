@@ -37,7 +37,7 @@ export const UsersResolvers = {
                     },
                 });
             }
-            const data = await collection.find().sort({name: -1}).limit((pageNum - 1) * pageSize).limit(pageSize);
+            const data = await collection.find().sort({name: -1}).skip((pageNum - 1) * pageSize).limit(pageSize);
             return {
                 results: data.toArray(),
                 total: await collection.countDocuments()

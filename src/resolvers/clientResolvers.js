@@ -1,17 +1,15 @@
-import {ObjectId} from "mongodb";
 import db from "../config/mongoConnection.js";
+import {ObjectId} from "mongodb";
 import {GraphQLError} from "graphql/error/index.js";
 
-const collection = db.collection('candidate');
+export const clientCollection = db.collection('client');
 
-export const candidateCollection = collection
-
-export const CandidateResolvers = {
-    Candidate: {
+export const ClientResolvers = {
+    Client: {
         id: (parent) => parent.id ?? parent._id
     },
     Query: {
-        candidates: async (_, {pageNum, pageSize}, context) => {
+        clients: async (_, {pageNum, pageSize}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
                     extensions: {
@@ -20,13 +18,13 @@ export const CandidateResolvers = {
                     },
                 });
             }
-            const data = await collection.find().sort({name: -1}).skip((pageNum - 1) * pageSize).limit(pageSize);
+            const data = await clientCollection.find().sort({companyName: -1}).skip((pageNum - 1) * pageSize).limit(pageSize);
             return {
                 results: data.toArray(),
-                total: await collection.countDocuments()
+                total: await clientCollection.countDocuments()
             }
         },
-        candidate: async (_, {id}, context) => {
+        client: async (_, {id}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
                     extensions: {
@@ -35,9 +33,9 @@ export const CandidateResolvers = {
                     },
                 });
             }
-            return await collection.findOne({_id: new ObjectId(id)})
+            return await clientCollection.findOne({_id: new ObjectId(id)})
         },
-        searchCandidate: async (_, {name}, context) => {
+        searchClient: async (_, {name}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
                     extensions: {
@@ -46,12 +44,11 @@ export const CandidateResolvers = {
                     },
                 });
             }
-            return await collection.find({name: {$regex: name, $options: "i"}}).toArray();
-
+            return await clientCollection.find({companyName: {$regex: name, $options: "i"}}).toArray();
         }
     },
     Mutation: {
-        addCandidate: async (_, {data}, context) => {
+        addClient: async (_, {data}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
                     extensions: {
@@ -60,10 +57,10 @@ export const CandidateResolvers = {
                     },
                 });
             }
-            const candidate = await collection.insertOne({...data})
-            return candidate.insertedId
+            const company = await clientCollection.insertOne({...data})
+            return company.insertedId
         },
-        updateCandidate: async (_, {data, id}, context) => {
+        updateClient: async (_, {data, id}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
                     extensions: {
@@ -72,8 +69,10 @@ export const CandidateResolvers = {
                     },
                 });
             }
-            const candidate = await collection.updateOne({_id: new ObjectId(id)}, {$set: {...data}})
-            return candidate.acknowledged ? "success" : undefined
+            const company = await clientCollection.updateOne({_id: new ObjectId(id)}, {
+                $set: {...data}
+            })
+            return company.acknowledged ? "success" : undefined
         }
     }
 }

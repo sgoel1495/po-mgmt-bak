@@ -1,8 +1,8 @@
 import {ObjectId} from "mongodb";
 import db from "../config/mongoConnection.js";
 import {vendorCollection} from "./vendorResolvers.js";
-import {candidateCollection} from "./candidateResolvers.js";
 import {GraphQLError} from "graphql/error/index.js";
+import {joiningCollection} from "./joiningResolver.js";
 
 const collection = db.collection('openings');
 
@@ -11,7 +11,7 @@ export const openingsCollection = collection
 export const OpeningResolvers = {
     Opening: {
         id: (parent) => parent.id ?? parent._id,
-        candidates: async (parent) => await candidateCollection.find({_id: {$in: parent.candidates}}).toArray(),
+        joinings: async (parent) => await joiningCollection.find({_id: {$in: parent.joinings}}).toArray(),
     },
     Query: {
         opening: async (_, {id}, context) => {
@@ -43,6 +43,23 @@ export const OpeningResolvers = {
                 }
             })
             return opening.insertedId
+        },
+        updateOpening: async (_, {data, openingId}, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const opening = await collection.updateOne({_id: new ObjectId(openingId)}, {
+                $set: {
+                    ...data,
+                    candidates: []
+                }
+            });
+            return opening.acknowledged ? "success" : undefined
         }
     }
 }

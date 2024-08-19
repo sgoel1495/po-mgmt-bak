@@ -18,7 +18,7 @@ export const CompanyResolvers = {
                     },
                 });
             }
-            const data = await companyCollection.find().sort({companyName: -1}).limit((pageNum - 1) * pageSize).limit(pageSize);
+            const data = await companyCollection.find().sort({companyName: -1}).skip((pageNum - 1) * pageSize).limit(pageSize);
             return {
                 results: data.toArray(),
                 total: await companyCollection.countDocuments()
@@ -59,6 +59,20 @@ export const CompanyResolvers = {
             }
             const company = await companyCollection.insertOne({...data})
             return company.insertedId
+        },
+        updateCompany: async (_, {data, id}, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const company = await companyCollection.updateOne({_id: new ObjectId(id)}, {
+                $set: {...data}
+            })
+            return company.acknowledged ? "success" : undefined
         }
     }
 }

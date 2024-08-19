@@ -1,0 +1,81 @@
+type Joining {
+    id: ObjectID,
+    empId: String,
+    candidate: Candidate!,
+    company: Company,
+    joiningDate: Date,
+    actualStartDate: Date,
+    paymentTerms: Int,
+    officialEmail: EmailAddress,
+    vendor: Vendor!,
+    vendorSpoc: Person,
+    vendorAcctSpoc: Person,
+    vendorRate: Rate!,
+    candidateRate: Rate!,
+    client: Client!,
+    projectName: String,
+    projectLocation: String,
+    timesheetApprover: Person
+}
+
+input JoiningInput {
+    empId: String,
+    candidate: ObjectID!,
+    company: ObjectID,
+    joiningDate: Date,
+    actualStartDate: Date,
+    paymentTerms: Int,
+    officialEmail: EmailAddress,
+    vendor: ObjectID!
+    vendorSpoc: PersonInput,
+    vendorAcctSpoc: PersonInput,
+    vendorRate: RateInput!,
+    candidateRate: RateInput!,
+    client: ObjectID!,
+    projectName: String,
+    projectLocation: String,
+    timesheetApprover: PersonInput
+}
+
+input JoiningUpdateInput {
+    empId: String,
+    candidate: ObjectID!,
+    company: ObjectID,
+    joiningDate: Date,
+    actualStartDate: Date,
+    paymentTerms: Int,
+    officialEmail: EmailAddress,
+    vendorSpoc: PersonInput,
+    vendorAcctSpoc: PersonInput,
+    vendorRate: RateInput!,
+    candidateRate: RateInput!,
+    projectName: String,
+    projectLocation: String,
+    timesheetApprover: PersonInput
+}
+
+type JoiningOpening {
+    joining: Joining,
+    opening: Opening
+}
+
+type CandidateJoining {
+    candidate: Candidate,
+    joinings: [JoiningOpening],
+}
+
+type CompanyJoining {
+    candidate: Candidate,
+    vendor: Vendor
+}
+
+extend type Query {
+    joining(id: ObjectID): Joining
+    joiningByCandidate(candidateId: ObjectID,openingId: ObjectID): CandidateJoining
+    joiningByBank(companyId: ObjectID): [CompanyJoining]
+}
+
+extend type Mutation {
+    addJoining(data: JoiningInput, openingId: String): ObjectID
+    updateJoining(data: JoiningUpdateInput, joiningId: String): String
+}

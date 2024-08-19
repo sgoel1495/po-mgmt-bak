@@ -1,0 +1,37 @@
+type Client {
+    id: ObjectID,
+    companyName: String,
+    logo: String,
+    signingAuthName: String,
+    signingAuthEmail: EmailAddress,
+    signingAuthDesignation: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String
+}
+
+input ClientInput {
+    companyName: String,
+    logo: String,
+    signingAuthName: String,
+    signingAuthEmail: EmailAddress,
+    signingAuthDesignation: String,
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String
+}
+
+type PaginatedClient {
+    results: [Client!]
+    total: Int
+}
+type Query {
+    clients(pageNum: Int, pageSize: Int): PaginatedClient!
+    client(id: ObjectID): Client
+    searchClient(name: String): [Client]
+}
+
+type Mutation {
+    addClient(data: ClientInput): ObjectID
+    updateClient(data: ClientInput, id: String): String
+}

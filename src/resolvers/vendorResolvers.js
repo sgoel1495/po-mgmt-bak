@@ -1,6 +1,6 @@
 import {ObjectId} from "mongodb";
 import db from "../config/mongoConnection.js";
-import {companyCollection} from "./companyResolvers.js";
+import {clientCollection} from "./clientResolvers.js";
 import {openingsCollection} from "./openingsResolvers.js";
 import {GraphQLError} from "graphql/error/index.js";
 
@@ -9,7 +9,7 @@ export const vendorCollection = collection
 export const VendorResolvers = {
     Vendor: {
         id: (parent) => parent.id ?? parent._id,
-        company: async (parent) => await companyCollection.findOne({_id: parent.company}),
+        client: async (parent) => await clientCollection.findOne({_id: parent.client}),
         openings: async (parent) => await openingsCollection.find({_id: {$in: parent.openings}}).toArray()
     },
     Query: {
@@ -22,7 +22,7 @@ export const VendorResolvers = {
                     },
                 });
             }
-            const data = await collection.find().sort({name: -1}).limit((pageNum - 1) * pageSize).limit(pageSize);
+            const data = await collection.find().sort({name: -1}).skip((pageNum - 1) * pageSize).limit(pageSize);
             return {
                 results: data.toArray(),
                 total: await collection.countDocuments()
@@ -50,8 +50,25 @@ export const VendorResolvers = {
                     },
                 });
             }
-            const vendor = await collection.insertOne({...data, company: new ObjectId(data.company), openings: []})
+            const vendor = await collection.insertOne({...data, client: new ObjectId(data.client), openings: []})
             return vendor.insertedId
+        },
+        updateVendor: async (_, {data, id}, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const vendor = await collection.updateOne({_id: new ObjectId(id)}, {
+                $set: {
+                    ...data,
+                    client: new ObjectId(data.client)
+                }
+            })
+            return vendor.acknowledged ? "success" : undefined
         }
     }
 }
