@@ -1,3 +1,5 @@
+scalar Upload
+
 type Person {
     name: String,
     email: EmailAddress,
@@ -39,4 +41,33 @@ input BankInput {
     addressLine2: String,
     addressLine3: String,
     bankName: String
+}
+
+type Documents {
+    id: ObjectID,
+    name: String,
+    description: String,
+    link: String
+    ownerId: ObjectID
+}
+
+input DocumentInput {
+    name: String,
+    description: String,
+    file: Upload
+}
+
+type PaginatedDocuments {
+    results: [Documents!]
+    total: Int
+}
+
+extend type Query {
+    documents(ownerId: String!, pageNum: Int, pageSize: Int): PaginatedDocuments
+}
+
+extend type Mutation {
+    addDocument(data: DocumentInput!, ownerId: String): ObjectID
+    updateDocument(data: DocumentInput!, id: String): String
+    deleteDocument(id: String): String
 }

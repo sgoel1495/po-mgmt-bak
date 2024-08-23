@@ -13,8 +13,6 @@ type Joining {
     vendorRate: Rate!,
     candidateRate: Rate!,
     client: Client!,
-    projectName: String,
-    projectLocation: String,
     timesheetApprover: Person
 }
 
@@ -32,8 +30,6 @@ input JoiningInput {
     vendorRate: RateInput!,
     candidateRate: RateInput!,
     client: ObjectID!,
-    projectName: String,
-    projectLocation: String,
     timesheetApprover: PersonInput
 }
 
@@ -49,8 +45,6 @@ input JoiningUpdateInput {
     vendorAcctSpoc: PersonInput,
     vendorRate: RateInput!,
     candidateRate: RateInput!,
-    projectName: String,
-    projectLocation: String,
     timesheetApprover: PersonInput
 }
 

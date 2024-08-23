@@ -12,7 +12,7 @@ type Client {
 
 input ClientInput {
     companyName: String,
-    logo: String,
+    logo: Upload,
     signingAuthName: String,
     signingAuthEmail: EmailAddress,
     signingAuthDesignation: String,

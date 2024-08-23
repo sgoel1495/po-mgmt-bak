@@ -1,0 +1,31 @@
+type Vault {
+    domain: String
+    username: String
+    email: EmailAddress
+    password: String
+    description: String
+}
+
+input VaultInput {
+    domain: String
+    username: String
+    email: EmailAddress
+    password: String
+    description: String
+}
+
+type PaginatedVault {
+    results: [Vault!]
+    total: Int
+}
+
+extend type Query {
+    secret(id: String): Vault
+    secrets(pageNum: Int, pageSize: Int): PaginatedVault!
+}
+
+extend type Mutation {
+    addSecret(data: VaultInput!): String
+    deleteSecret(id: String!): String
+    updateSecret(data: VaultInput!): String
+}

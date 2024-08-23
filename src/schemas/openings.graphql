@@ -2,6 +2,7 @@ type Opening {
     id: ID,
     name: String,
     endClient: String,
+    location: String,
     suggestedRate: Rate,
     joinings: [Joining]
 }
@@ -9,6 +10,7 @@ type Opening {
 input OpeningInput {
     name: String,
     endClient: String,
+    location: String,
     suggestedRate: RateInput,
 }
 

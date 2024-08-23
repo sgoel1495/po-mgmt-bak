@@ -21,6 +21,9 @@ import {GraphQLError} from "graphql/error/index.js";
 import {startStandaloneServer} from "@apollo/server/standalone";
 import {CompanyResolvers} from "./resolvers/companyResolvers.js";
 import {JoiningResolvers} from "./resolvers/joiningResolver.js";
+import {VaultResolvers} from "./resolvers/vaultResolvers.js";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
+import {config} from "./config/index.js";
 //highlight-end
 
 const PORT = process.env.PORT || 5050;
@@ -83,6 +86,11 @@ const joiningTypeDefs = gql(
     })
 );
 
+const vaultTypeDefs = gql(
+    readFileSync("./src/schemas/vault.graphql", {
+        encoding: "utf-8",
+    })
+);
 
 const server = new ApolloServer({
     schema: buildSubgraphSchema([
@@ -96,55 +104,71 @@ const server = new ApolloServer({
         {typeDefs: userTypeDefs, resolvers: UsersResolvers},
         {typeDefs: companyTypeDefs, resolvers: CompanyResolvers},
         {typeDefs: joiningTypeDefs, resolvers: JoiningResolvers},
+        {typeDefs: vaultTypeDefs, resolvers: VaultResolvers},
     ]),
 });
 // Note you must call `start()` on the `ApolloServer`
 // instance before passing the instance to `expressMiddleware`
-// await server.start();
+await server.start();
 
 
 //highlight-end
 
-const {url} = await startStandaloneServer(server, {
-    listen: {port: PORT, path: '/graphql'},
-    context: async ({req}) => {
-        // // get the user token from the headers
-        const token = req.headers.authorization || '';
-        //
-        // // try to retrieve a user with the token
-        let isValid = false
-        try {
-            AuthService.init()
-            isValid = await AuthService.ValidateAccessToken(token.replace("Bearer ", ''));
-        } catch (e) {
-        }
-
-        // // add the user to the context
-        return {isValid};
-    },
-});
-// app.use(
-//     '/graphql',
-//     cors(),
-//     express.json(),
-//     async (req, res, next) => {
-//         console.log(req.url);
-//         // get the user token from the headers
+// const {url} = await startStandaloneServer(server, {
+//     listen: {port: PORT, path: '/graphql'},
+//     context: async ({req}) => {
+//         // // get the user token from the headers
 //         const token = req.headers.authorization || '';
-//
-//         try{
-//             // try to retrieve a user with the token
+//         //
+//         // // try to retrieve a user with the token
+//         let isValid = false
+//         try {
 //             AuthService.init()
-//             const isValid = await AuthService.ValidateAccessToken(token);
+//             isValid = await AuthService.ValidateAccessToken(token.replace("Bearer ", ''));
+//         } catch (e) {
 //         }
-//         next()
-//     },
-//     expressMiddleware(server),
-// );
 //
-// // start the Express server
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port: ${PORT}`);
+//         // // add the user to the context
+//         return {isValid};
+//     },
 // });
 
-console.log(url)
+const authenticate = async (req) => {
+    const token = req.headers.authorization || '';
+
+    // try to retrieve a user with the token
+    let isValid = false
+    try {
+        AuthService.init()
+        isValid = await AuthService.ValidateAccessToken(token.replace("Bearer ", ''));
+    } catch (e) {
+    }
+
+    // add the user to the context
+    return isValid;
+}
+
+app.use('/media', async (req, res, next) => {
+    if (await authenticate(req))
+        return next();
+    return res.status(401).send('Not authorized');
+}, express.static(config.uploadDirectoryUrl.pathname))
+
+app.use(
+    '/graphql',
+    cors(),
+    graphqlUploadExpress(),
+    express.json(),
+    expressMiddleware(server, {
+        context: async ({req}) => {
+            return {isValid: await authenticate(req)};
+        },
+    }),
+);
+
+// start the Express server
+app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
+});
+
+// console.log(url)

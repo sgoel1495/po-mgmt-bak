@@ -1,6 +1,7 @@
 import db from "../config/mongoConnection.js";
 import {ObjectId} from "mongodb";
 import {GraphQLError} from "graphql/error/index.js";
+import saveFile from "../helpers/saveFile.js";
 
 export const clientCollection = db.collection('client');
 
@@ -57,7 +58,11 @@ export const ClientResolvers = {
                     },
                 });
             }
-            const company = await clientCollection.insertOne({...data})
+            const updatedData = {...data}
+            if (data.logo) {
+                updatedData['logo'] = await saveFile(data.logo, data.companyName + "_logo")
+            }
+            const company = await clientCollection.insertOne({...updatedData})
             return company.insertedId
         },
         updateClient: async (_, {data, id}, context) => {
@@ -69,8 +74,12 @@ export const ClientResolvers = {
                     },
                 });
             }
+            const updatedData = {...data}
+            if (data.logo) {
+                updatedData['logo'] = await saveFile(data.logo, data.companyName + "_logo")
+            }
             const company = await clientCollection.updateOne({_id: new ObjectId(id)}, {
-                $set: {...data}
+                $set: updatedData
             })
             return company.acknowledged ? "success" : undefined
         }

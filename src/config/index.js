@@ -10,5 +10,6 @@ export const config = {
     secret: process.env.SECRET_KEY,
 
     accessTokenExpiry: 60 * 60 * 24,
-    refreshTokenExpiry: 60 * 60 * 24 * 7
+    refreshTokenExpiry: 60 * 60 * 24 * 7,
+    uploadDirectoryUrl:  new URL(process.env.UPLOAD_DIRECTORY_URL, import.meta.url)
 };
