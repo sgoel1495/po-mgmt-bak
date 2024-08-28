@@ -7,7 +7,8 @@ type Client {
     signingAuthDesignation: String,
     addressLine1: String,
     addressLine2: String,
-    addressLine3: String
+    addressLine3: String,
+    timeSheetFormat: String
 }
 
 input ClientInput {
@@ -18,7 +19,8 @@ input ClientInput {
     signingAuthDesignation: String,
     addressLine1: String,
     addressLine2: String,
-    addressLine3: String
+    addressLine3: String,
+    timeSheetFormat: String
 }
 
 type PaginatedClient {

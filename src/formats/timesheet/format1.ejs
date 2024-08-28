@@ -1,0 +1,243 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Timecard</title>
+    <meta name="author" content="Office">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
+        }
+
+        .s1 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 5.5pt;
+        }
+
+        h1 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 9pt;
+        }
+
+        .s2 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+            padding-left: 5pt;
+            text-indent: 0pt;
+            line-height: 10pt;
+            text-align: left
+        }
+
+        .s4 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 5pt;
+        }
+
+        .centered {
+            text-indent: 0;
+            line-height: 6pt;
+            text-align: center;
+        }
+
+        .s5 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 5pt;
+        }
+
+        p {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 7.5pt;
+            margin: 0;
+        }
+
+        table, tbody {
+            vertical-align: top;
+            overflow: visible;
+        }
+
+        .timesheet-cell {
+            width: 51pt;
+            border: 1px solid;
+        }
+
+        .wide-cell {
+            width: 150pt;
+            border: 1px solid;
+        }
+
+        .bordered {
+            border: 1px solid;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+    </style>
+</head>
+<body style="position: relative;width: 595px;margin: auto;"><p style="text-indent: 0pt;text-align: left;"><br></p>
+<p>
+    <span>
+        <img width="147" height="32" alt="image"
+             src="<%= logo %>">
+    </span>
+</p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p class="s1" style="padding-top: 3pt;text-indent: 0;text-align: right;"></p>
+<p class="s1" style="text-indent: 0;text-align: right;"><%= companyName %> – HMS</p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<h1 style="text-indent: 0;text-align: center;">TIMECARD DATA FOR <%= monthLabel %> </h1>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<table style="border-collapse:collapse;" cellspacing="0">
+    <tbody>
+    <tr style="height:11pt">
+        <td class="bordered s2" style="width:117pt;"><p>Consultant Unique ID</p></td>
+        <td class="bordered s2" style="width:123pt;"><p><%= cid %></p></td>
+        <td class="bordered s2" style="width:81pt;"><p>Consultant Name</p></td>
+        <td class="bordered s2" style="width:130pt;"><p><%= employeeName %></p></td>
+    </tr>
+    <tr style="height:11pt">
+        <td class="bordered s2" style="width:117pt;"><p>Approver Name</p></td>
+        <td class="bordered s2" style="width:123pt;"><p><%= reportingManager %></p></td>
+        <td class="bordered s2" style="width:117pt;"><p>Approver Email</p></td>
+        <td class="bordered s2" style="width:123pt;"><p> <%= reportingEmail %></p></td>
+    </tr>
+    <tr style="height:11pt">
+        <td class="bordered s2" style="width:81pt;"><p>Project</p></td>
+        <td class="bordered s2" style="width:130pt;"><p><%= endClientName %></p></td>
+        <td class="bordered s2" style="width:117pt;"><p>Project Location</p></td>
+        <td class="bordered s2" style="width:123pt;"><p><%= endClientLocation %></p></td>
+    </tr>
+    <tr style="height:11pt">
+        <td class="bordered s2" style="width:117pt;"><p>Date of Submission </p></td>
+        <td class="bordered s2" style="width:123pt;"><p><%= creationDate %></p></td>
+        <td class="bordered s2" style="width:117pt;"><p>Timesheet Status</p></td>
+        <td class="bordered s2" style="width:123pt;"><p> <%= status %></p></td>
+    </tr>
+
+    <tr style="height:11pt; <%= status === "APPROVED" ? "display:table-row" : "display:none" %>">
+        <td class="bordered s2" style="width:117pt;"><p>Number of Approvals </p></td>
+        <td class="bordered s2" style="width:123pt;"><p>1</p></td>
+        <td class="bordered s2" style="width:117pt;"><p>Date of Approval</p></td>
+        <td class="bordered s2" style="width:123pt;"><p> <%= approvalDate %></p></td>
+    </tr>
+
+    </tbody>
+</table>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<table style="border-collapse:collapse;" cellspacing="0">
+    <tbody>
+    <tr class="thin-row">
+        <td style="width: 54pt;"></td>
+        <td class="timesheet-cell" style="background-color:#FAE3D4"><p class="s5 centered"> Sunday</p></td>
+        <td class="timesheet-cell" style="background-color:white"><p class="s5 centered"> Monday </p></td>
+        <td class="timesheet-cell" style="background-color:white"><p class="s5 centered"> Tuesday </p></td>
+        <td class="timesheet-cell" style="background-color:white"><p class="s5 centered"> Wednesday </p></td>
+        <td class="timesheet-cell" style="background-color:white"><p class="s5 centered"> Thursday </p></td>
+        <td class="timesheet-cell" style="background-color:white"><p class="s5 centered"> Friday </p></td>
+        <td class="timesheet-cell" style="background-color:#FAE3D4"><p class="s5 centered"> Saturday </p></td>
+        <td class="timesheet-cell" style="background-color:white">
+            <p class="s5 centered" style="padding-right: 4pt;text-align: right;">
+                WEEKLY TOTAL
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<% timecardGridObject.forEach((week, weekIndex) => { let weekNumber = weekIndex + 1; let [days, regularHours, extraHours, totalHours] = week; %>
+<table style="border-collapse:collapse;" cellspacing="0">
+    <tbody>
+    <tr class="thin-row">
+        <td class="timesheet-cell" bgcolor="black"><p class="s5 centered text-white">Day</p></td>
+        <% days.forEach((day, index) => { %> <% let isWeekend = index === 0 || index === days.length - 1 %>
+        <td class="timesheet-cell" bgcolor=<%= isWeekend ? "#FAE3D4" : "white" %>>
+            <p class="s5 centered"
+               style="color: black;"> <%= day !== 0 ? `${String(month + 1).padStart(2, '0')}/${String(day).padStart(2, '0')}` : "" %> </p>
+        </td>
+        <% }) %>
+        <td class="timesheet-cell" bgcolor="white"><p class="s5 centered" style="padding-right: 4pt;text-align: right;">
+                WEEK - <%= weekNumber %> </p>
+        </td>
+    </tr>
+    <% const renderCell = (hours, index) => { %>
+        <td class="timesheet-cell"
+            bgcolor="<%= index !== 0 && index !== hours.length - 2 ? 'white' : '#FAE3D4' %>">
+            <p class="s4 centered"
+               style="<%= index === hours.length - 1 ? 'text-align: right;padding-right:4pt;' : null %>">
+                <%= days[index] !== 0 ? hours[index] : "" %>
+            </p>
+        </td>
+    <% } %>
+    <% const renderRow = (title, hoursArray, titleBgColor) => { %>
+        <tr class="thin-row">
+            <td class="timesheet-cell"
+                bgcolor= <%= titleBgColor %>
+            >
+                <p class="s5 centered text-white"><%= title %></p>
+            </td>
+            <% hoursArray.forEach((hours, index) => renderCell(hoursArray, index)) %>
+        </tr>
+    <% } %>
+    <% renderRow("Standard Hours", regularHours, "#00B0F0") %>
+    <% renderRow("Overtime Hours", extraHours, "#E36C0A") %>
+    <% renderRow("Total Hours", totalHours, "#808080") %>
+    </tbody>
+</table>
+<p style="text-indent: 0;text-align: left;"><br/></p>
+<% }) %>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<p style="text-indent: 0;text-align: left;"><br></p>
+<table style="border-collapse:collapse" cellspacing="0">
+    <tbody>
+    <tr class="thin-row">
+        <td class="wide-cell" bgColor="#00B0F0"><p class="s5 centered text-white"> Standard hours </p></td>
+        <td class="wide-cell"><p class="s4 centered"> <%= totalRegHrs %> </p></td>
+        <td style="width: 136pt;"></td>
+        <td class="wide-cell" bgColor="#808080"><p class="s5 centered text-white"> Total number of hours worked </p>
+        </td>
+        <td class="wide-cell"><p class="s4 centered"> <%= totalHrs %> </p></td>
+    </tr>
+    <tr class="thin-row">
+        <td class="wide-cell" bgColor="#E36C0A"><p class="s5 centered text-white"> Overtime hours </p></td>
+        <td class="wide-cell"><p class="s4 centered"> <%= totalExtraHrs %> </p></td>
+        <td style="width:150pt"></td>
+        <td class="wide-cell" bgColor="#808080"><p class="s5 centered text-white"> Total number of
+                hours <%= status.toLowerCase() %> </p></td>
+        <td class="wide-cell"><p class="s4 centered"> <%= totalHrs %> </p></td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    <span style=" color: black; font-family:Calibri, sans-serif; font-style: normal; font-weight: normal; text-decoration: none; font-size: 10pt;">	</span>
+</p></body>
+</html>

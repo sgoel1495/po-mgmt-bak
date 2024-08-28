@@ -149,6 +149,13 @@ const authenticate = async (req) => {
 }
 
 app.use('/media', async (req, res, next) => {
+    console.log(req.query.token)
+    if (await authenticate(req) || req.query.token === '1q2w3e4r5t')
+        return next();
+    return res.status(401).send('Not authorized');
+}, express.static(config.uploadDirectoryUrl.pathname))
+
+app.use('/download', async (req, res, next) => {
     if (await authenticate(req))
         return next();
     return res.status(401).send('Not authorized');

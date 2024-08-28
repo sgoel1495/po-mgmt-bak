@@ -62,8 +62,14 @@ type PaginatedDocuments {
     total: Int
 }
 
+type Options{
+    value: String,
+    label: String
+}
+
 extend type Query {
     documents(ownerId: String!, pageNum: Int, pageSize: Int): PaginatedDocuments
+    getTimeSheetFormats: [Options]
 }
 
 extend type Mutation {

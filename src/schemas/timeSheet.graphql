@@ -17,8 +17,8 @@ enum TimeSheetStatus {
 
 type TimeSheet {
     id: ID,
-    candidate: Candidate,
-    month: Int,
+    joining: Joining,
+    month: String,
     timeSheet: [DayTime!],
     submissionDate: Date,
     approvalDate: Date,
@@ -27,8 +27,8 @@ type TimeSheet {
 
 input TimeSheetInput {
     id: ID,
-    candidate: ObjectID,
-    month: Int,
+    joining: ObjectID,
+    month: String,
     timeSheet: [DayTimeInput!],
     submissionDate: Date,
     approvalDate: Date,
@@ -36,9 +36,10 @@ input TimeSheetInput {
 }
 
 extend type Query {
-    getTimeSheet(month:Int, candidate: ID): TimeSheet
+    getTimeSheet(month:String, joining: ID): TimeSheet
 }
 
 extend type Mutation {
     updateTimeSheet(data:TimeSheetInput): String
+    generateTimesheet(id: ID): String
 }

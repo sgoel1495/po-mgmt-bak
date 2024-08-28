@@ -1,0 +1,383 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>1a60e627-d0db-48b0-9cd3-c4276a5147f5</title>
+    <style type="text/css">
+        @page {
+            size: A4 portrait;
+            margin: 40pt 0 -20pt 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
+        }
+
+        h2 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        p {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+            margin: 0pt;
+        }
+
+        .s1 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 8pt;
+            vertical-align: 4pt;
+        }
+
+        h3 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        h1 {
+            color: #595959;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 20pt;
+        }
+
+        .s2 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 36pt;
+        }
+
+        .s3 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 14pt;
+        }
+
+        .s4 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s5 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s6 {
+            color: black;
+            font-family: Calibri, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        li {
+            display: block;
+        }
+
+        #l1 {
+            padding-left: 0pt;
+        }
+
+        #l1 > li > p:first-child:before {
+            content: " ";
+            color: black;
+            font-family: Symbol, serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        #l1 > li > p:first-child:before {
+            content: " ";
+            color: black;
+            font-family: Symbol, serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        table, tbody {
+            vertical-align: top;
+            overflow: visible;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media print {
+            body {
+                width: 21cm;
+                height: 29.7cm;
+            }
+        }
+
+        .no-bullet-point::before {
+            content: "• " !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div>
+        <h2 style="text-indent: 0pt;text-align: left;">Career Elf Inc</h2>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;">4123 W 170th St
+            Lawndale CA 90260 </p>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;">Phone: <%= fromPhone %></p>
+    </div>
+    <h1 style="text-indent: 0pt;text-align: right;">INVOICE</h1>
+</div>
+
+<p style="text-indent: 0pt;text-align: left;"><br></p>
+
+<p class="s4" style="line-height: 109%;text-align: right;">
+    INVOICE <%= invoiceNo %>
+</p>
+<p class="s4" style="line-height: 109%;text-align: right;">
+    DATE:<%= cdLabel %>
+</p>
+<p style="text-indent: 0pt;text-align: left;"><br></p>
+
+<div class="row">
+    <div>
+        <h3 style="text-indent: 0pt;text-align: left;">BILL TO:</h3>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;"><%= toCompanyName %></p>
+        <p style="text-indent: 0pt;text-align: left;"><%= toAdrs1 %></p>
+        <p style="text-indent: 0pt;text-align: left;"><%= toAdrs2 %> <%= toState %> <%= toZip %></p>
+        <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+        <h3 style="text-indent: 0pt;text-align: left;">COMMENTS OR SPECIAL INSTRUCTIONS:</h3>
+        <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;">Invoice for <%= monthLabel %> 2024</p>
+    </div>
+    <div class="textbox" style="border:2.0pt solid #F59D56;display:block;min-height:106.0pt;width:173.0pt;">
+        <p class="s2" style="padding-top: 21pt;text-indent: 0pt;text-align: center;">DUE</p>
+        <p class="s3" style="text-indent: 0pt;text-align: center;"><%= ddLabel %></p>
+    </div>
+</div>
+<p style="padding-top: 13pt;text-indent: 0pt;text-align: left;"><br></p>
+
+<p style="padding-top: 13pt;text-indent: 0pt;text-align: left;"><br></p>
+<table style="width: 100%;border-collapse:collapse;" cellspacing="0">
+    <tbody>
+    <tr style="height:20pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">QUANTITY</p>
+        </td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">DESCRIPTION</p>
+        </td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">UNIT PRICE</p>
+        </td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">TOTAL</p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalRegHrs %></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Working Hours</p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= rate %></p>
+        </td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= regularHrAmt %></p>
+        </td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalExtraHrs %></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Overtime</p>
+        </td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= extraRate %></p>
+        </td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= overtimeHrAmt %></p>
+        </td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p  class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left">10</p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-bottom: 2pt;padding-left: 5pt;padding-right: 5pt;text-indent: 0pt;text-align: left;">Daily late payment charge of 11% from the invoice #0003</p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right">6969.60</p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;">69696.00</p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:19pt">
+        <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p style="text-indent: 0pt;text-align: left;"><br></p></td>
+    </tr>
+    <tr style="height:22pt">
+        <td style="width:454pt;border-top-style:solid;border-top-width:1pt;border-right-style:solid;border-right-width:1pt"
+            colspan="3" rowspan="3">
+            <p class="s6"
+               style="padding-top: 4pt;padding-right: 5pt;text-indent: 0pt;text-align: right;">
+                SUBTOTAL</p>
+            <p class="s6"
+               style="padding-left: 393pt;padding-right: 5pt;text-indent: 36pt;line-height: 21pt;text-align: right;">TAX
+                TOTAL DUE</p></td>
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
+        </td>
+    </tr>
+    <tr style="height:21pt">
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;">00.00</p></td>
+    </tr>
+    <tr style="height:21pt">
+        <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p style="text-indent: 0pt;text-align: left;"><br></p>
+<p style="text-indent: 0pt;text-align: left;">Make all ACH transfers to Career Elf Inc</p>
+<p style="text-indent: 0pt;text-align: left;">If you have any questions concerning this invoice,
+    contact: <%= fromName %> at <%= fromPhone %>.</p>
+<p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+<p style="text-indent: 0pt;text-align: left;">Terms &amp; Conditions:</p>
+<ul id="l1" style="padding-left: 14pt;">
+    <li data-list-text="">
+        <p style="">
+            Settlement of all invoices is required by their designated due dates.
+        </p>
+    </li>
+    <li data-list-text="">
+        <p style="">
+            In the event that a due date coincides with a weekend or public holiday, payment must be disbursed
+        </p>
+    </li>
+    <li data-list-text="">
+        <p class="no-bullet-point">
+            on the preceding business day to ensure timely processing.
+        </p>
+    </li>
+    <li data-list-text="">
+        <p style="">
+            Non-adherence to payment deadlines may incur a daily late payment charge of 11%, which will be
+        </p>
+    </li>
+    <li data-list-text="">
+        <p class="no-bullet-point">
+            appended to the subsequent invoice.
+        </p>
+    </li>
+</ul>
+<p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+<p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+<p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+<p style="padding-left: 277pt;text-indent: 0pt;text-align: right;color:#808080">
+    CAREER ELF INC 4123 W 170th ST LAWNDALE CA 90260
+</p>
+</body>
+</html>

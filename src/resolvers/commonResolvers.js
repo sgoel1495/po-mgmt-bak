@@ -4,6 +4,8 @@ import {ObjectId} from "mongodb";
 import {GraphQLError} from "graphql/error/index.js";
 import saveFile from "../helpers/saveFile.js";
 import deleteFile from "../helpers/deleteFile.js";
+import {config} from "../config/index.js";
+import fs from 'fs'
 
 export const documentCollection = db.collection('documents');
 
@@ -27,6 +29,24 @@ export const CommonResolvers = {
                 results: data.toArray(),
                 total: await documentCollection.countDocuments({ownerId: new ObjectId(ownerId)})
             }
+        },
+        getTimeSheetFormats: (_, __, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const options = []
+            fs.readdirSync(config.timesheetFormatsDirectoryUrl).forEach(file => {
+                options.push({
+                    value: file,
+                    label: file.replace('.ejs', ''),
+                })
+            });
+            return options
         }
     },
     Mutation: {
@@ -65,7 +85,7 @@ export const CommonResolvers = {
                 const ownerId = (await documentCollection.findOne({_id: new ObjectId(id)})).ownerId.toString()
                 link = await saveFile(data.file, data.name + "_" + ownerId)
             }
-            const document = await documentCollection.updateOne({_id: new ObjectId(id)},{
+            const document = await documentCollection.updateOne({_id: new ObjectId(id)}, {
                 $set: {
                     name: data.name,
                     description: data.description,

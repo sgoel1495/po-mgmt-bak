@@ -4,7 +4,8 @@ import {createWriteStream, unlink} from "node:fs";
 export default async function saveFile(upload, fileName) {
     const {createReadStream, filename} = await upload;
     const stream = createReadStream();
-    const ext = filename.split(".")[1];
+    let ext = filename.split(".");
+    ext = ext[ext.length - 1];
     const fullFilename = fileName + "." + ext;
     const storedFileUrl = new URL(fullFilename, config.uploadDirectoryUrl);
     // Store the file in the filesystem.
