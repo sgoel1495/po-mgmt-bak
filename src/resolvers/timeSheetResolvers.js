@@ -11,7 +11,11 @@ import {_generateMonthArray, _getOTHours, _getStandardHours, _getTotalHours} fro
 import {config} from "../config/index.js";
 import {companyCollection} from "./companyResolvers.js";
 import {vendorCollection} from "./vendorResolvers.js";
+import timezone from 'dayjs/plugin/timezone.js'
+import utc from 'dayjs/plugin/utc.js'
 
+dayjs.extend(utc)
+dayjs.extend(timezone)
 const collection = db.collection('timesheets');
 
 export const TimeSheetResolvers = {
@@ -117,13 +121,13 @@ export const TimeSheetResolvers = {
             const otHours = _getOTHours(timeSheet.timeSheet)
             const data = {
                 invoiceNo: invoiceNumber,
-                cdLabel: dayjs().format('MM/DD/YYYY'),
+                cdLabel: dayjs().tz("America/Toronto").format('MM/DD/YYYY'),
                 toCompanyName: vendor.name,
                 toAdrs1: vendor.addressLine1,
                 toAdrs2: vendor.addressLine2,
                 toAdrs3: vendor.addressLine3,
                 monthLabel: dayjs(timeSheet.month).format('MMMM YYYY'),
-                ddLabel: dayjs().add(joining.paymentTerms, 'day').format('MM/DD/YYYY dddd').toUpperCase(),
+                ddLabel: dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day').format('MM/DD/YYYY dddd').toUpperCase(),
                 totalRegHrs: regHours,
                 rate: (joining.candidateRate.rate).toFixed(2),
                 regularHrAmt: (joining.candidateRate.rate * regHours).toFixed(2),
