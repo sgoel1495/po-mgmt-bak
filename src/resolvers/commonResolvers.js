@@ -47,6 +47,24 @@ export const CommonResolvers = {
                 })
             });
             return options
+        },
+        getInvoiceFormats: (_, __, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const options = []
+            fs.readdirSync(config.invoiceFormatsDirectoryUrl).forEach(file => {
+                options.push({
+                    value: file,
+                    label: file.replace('.ejs', ''),
+                })
+            });
+            return options
         }
     },
     Mutation: {

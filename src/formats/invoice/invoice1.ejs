@@ -1,7 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>1a60e627-d0db-48b0-9cd3-c4276a5147f5</title>
     <style type="text/css">
         @page {
             size: A4 portrait;
@@ -115,7 +114,7 @@
         }
 
         #l1 > li > p:first-child:before {
-            content: " ";
+            content: "• ";
             color: black;
             font-family: Symbol, serif;
             font-style: normal;
@@ -125,7 +124,7 @@
         }
 
         #l1 > li > p:first-child:before {
-            content: " ";
+            content: "• ";
             color: black;
             font-family: Symbol, serif;
             font-style: normal;
@@ -147,7 +146,6 @@
         @media print {
             body {
                 width: 21cm;
-                height: 29.7cm;
             }
         }
 
@@ -171,7 +169,7 @@
 <p style="text-indent: 0pt;text-align: left;"><br></p>
 
 <p class="s4" style="line-height: 109%;text-align: right;">
-    INVOICE <%= invoiceNo %>
+    INVOICE #<%= invoiceNo %>
 </p>
 <p class="s4" style="line-height: 109%;text-align: right;">
     DATE:<%= cdLabel %>
@@ -183,7 +181,8 @@
         <h3 style="text-indent: 0pt;text-align: left;">BILL TO:</h3>
         <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;"><%= toCompanyName %></p>
         <p style="text-indent: 0pt;text-align: left;"><%= toAdrs1 %></p>
-        <p style="text-indent: 0pt;text-align: left;"><%= toAdrs2 %> <%= toState %> <%= toZip %></p>
+        <p style="text-indent: 0pt;text-align: left;"><%= toAdrs2 %></p>
+        <p style="text-indent: 0pt;text-align: left;"><%= toAdrs3 %></p>
         <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
         <h3 style="text-indent: 0pt;text-align: left;">COMMENTS OR SPECIAL INSTRUCTIONS:</h3>
         <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;">Invoice for <%= monthLabel %> 2024</p>
@@ -213,38 +212,48 @@
     </tr>
     <tr style="height:19pt">
         <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalRegHrs %></p></td>
+            <p class="s6"
+               style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalRegHrs %></p></td>
         <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Working Hours</p></td>
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Working
+                Hours</p></td>
         <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= rate %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= rate %></p>
         </td>
         <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= regularHrAmt %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= regularHrAmt %></p>
         </td>
     </tr>
     <tr style="height:19pt">
         <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalExtraHrs %></p></td>
+            <p class="s6"
+               style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= totalExtraHrs %></p>
+        </td>
         <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
             <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Overtime</p>
         </td>
         <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= extraRate %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right;"><%= extraRate %></p>
         </td>
         <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= overtimeHrAmt %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= overtimeHrAmt %></p>
         </td>
     </tr>
     <tr style="height:19pt">
         <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p  class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left">10</p></td>
+            <p class="s6" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left"><br></p></td>
         <td style="width:284pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-bottom: 2pt;padding-left: 5pt;padding-right: 5pt;text-indent: 0pt;text-align: left;">Daily late payment charge of 11% from the invoice #0003</p></td>
+            <p class="s6"
+               style="padding-top: 2pt;padding-bottom: 2pt;padding-left: 5pt;padding-right: 5pt;text-indent: 0pt;text-align: left;">
+                <br></p></td>
         <td style="width:76pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right">6969.60</p></td>
+            <p class="s6" style="padding-top: 2pt;padding-right: 5pt;text-indent: 0pt;text-align: right"><br></p></td>
         <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;">69696.00</p></td>
+            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><br></p></td>
     </tr>
     <tr style="height:19pt">
         <td style="width:94pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
@@ -326,7 +335,8 @@
                style="padding-left: 393pt;padding-right: 5pt;text-indent: 36pt;line-height: 21pt;text-align: right;">TAX
                 TOTAL DUE</p></td>
         <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
         </td>
     </tr>
     <tr style="height:21pt">
@@ -335,7 +345,8 @@
     </tr>
     <tr style="height:21pt">
         <td style="width:85pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-            <p class="s6" style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
+            <p class="s6"
+               style="padding-top: 2pt;padding-right: 4pt;text-indent: 0pt;text-align: right;"><%= totalAmt %></p>
         </td>
     </tr>
     </tbody>
@@ -347,27 +358,27 @@
 <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
 <p style="text-indent: 0pt;text-align: left;">Terms &amp; Conditions:</p>
 <ul id="l1" style="padding-left: 14pt;">
-    <li data-list-text="">
+    <li data-list-text="•">
         <p style="">
             Settlement of all invoices is required by their designated due dates.
         </p>
     </li>
-    <li data-list-text="">
+    <li data-list-text="•">
         <p style="">
             In the event that a due date coincides with a weekend or public holiday, payment must be disbursed
         </p>
     </li>
-    <li data-list-text="">
+    <li data-list-text="•">
         <p class="no-bullet-point">
             on the preceding business day to ensure timely processing.
         </p>
     </li>
-    <li data-list-text="">
+    <li data-list-text="•">
         <p style="">
             Non-adherence to payment deadlines may incur a daily late payment charge of 11%, which will be
         </p>
     </li>
-    <li data-list-text="">
+    <li data-list-text="•">
         <p class="no-bullet-point">
             appended to the subsequent invoice.
         </p>
@@ -376,8 +387,9 @@
 <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
 <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
 <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
-<p style="padding-left: 277pt;text-indent: 0pt;text-align: right;color:#808080">
+<p style="text-indent: 0pt;text-align: right;color:#808080;">
     CAREER ELF INC 4123 W 170th ST LAWNDALE CA 90260
 </p>
+
 </body>
 </html>

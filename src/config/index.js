@@ -13,6 +13,7 @@ export const config = {
     refreshTokenExpiry: 60 * 60 * 24 * 7,
     uploadDirectoryUrl:  new URL(process.env.UPLOAD_DIRECTORY_URL, import.meta.url),
     timesheetFormatsDirectoryUrl:  new URL(process.env.TIMESHEET_FORMATS_DIRECTORY_URL, import.meta.url),
+    invoiceFormatsDirectoryUrl:  new URL(process.env.INVOICE_FORMATS_DIRECTORY_URL, import.meta.url),
     timesheetFooterFormatsDirectoryUrl:  new URL(process.env.TIMESHEET_FOOTER_FORMATS_DIRECTORY_URL, import.meta.url),
     mediaHost: process.env.MEDIA_HOST,
 };

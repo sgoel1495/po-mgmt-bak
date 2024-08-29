@@ -1,7 +1,7 @@
 import db from "../config/mongoConnection.js";
 import {ObjectId} from "mongodb";
 import {GraphQLError} from "graphql/error/index.js";
-import {generatePDF} from "../helpers/createPDF.js";
+import {generateInvoicePDF, generateTimesheetPDF} from "../helpers/createPDF.js";
 import {joiningCollection} from "./joiningResolver.js";
 import {clientCollection} from "./clientResolvers.js";
 import dayjs from 'dayjs'
@@ -9,7 +9,8 @@ import {candidateCollection} from "./candidateResolvers.js";
 import {openingsCollection} from "./openingsResolvers.js";
 import {_generateMonthArray, _getOTHours, _getStandardHours, _getTotalHours} from "../helpers/timesheet.js";
 import {config} from "../config/index.js";
-import fs from "fs";
+import {companyCollection} from "./companyResolvers.js";
+import {vendorCollection} from "./vendorResolvers.js";
 
 const collection = db.collection('timesheets');
 
@@ -50,18 +51,6 @@ export const TimeSheetResolvers = {
                 return doc.insertedId
             }
         },
-        downloadTimesheet: async (_, {id}, context) => {
-            if (!context.isValid) {
-                throw new GraphQLError('User is not authenticated', {
-                    extensions: {
-                        code: 'UNAUTHENTICATED',
-                        http: {status: 401},
-                    },
-                });
-            }
-            const url = new URL(`timesheet_${id}.pdf`, config.uploadDirectoryUrl)
-            return fs.readFileSync(url)
-        },
         generateTimesheet: async (_, {id}, context) => {
             if (!context.isValid) {
                 throw new GraphQLError('User is not authenticated', {
@@ -77,8 +66,8 @@ export const TimeSheetResolvers = {
             const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
             const client = await clientCollection.findOne({_id: new ObjectId(joining.client)})
             const url = new URL(client.logo, config.mediaHost)
-            await generatePDF({
-                logo: url+"?token=1q2w3e4r5t",
+            const data = {
+                logo: url + "?token=1q2w3e4r5t",
                 companyName: client.companyName.toUpperCase(),
                 month: dayjs(timeSheet.month).get('month'),
                 monthLabel: dayjs(timeSheet.month).format('MMMM\'YY').toUpperCase(),
@@ -103,7 +92,59 @@ export const TimeSheetResolvers = {
                 totalRegHrs: _getStandardHours(timeSheet.timeSheet),
                 totalHrs: _getTotalHours(timeSheet.timeSheet),
                 totalExtraHrs: _getOTHours(timeSheet.timeSheet)
-            }, client.timeSheetFormat, "timesheet_" + id + ".pdf")
+            }
+            await generateTimesheetPDF(data, client.timeSheetFormat, "timesheet_" + id + ".pdf")
+            return "success"
+        },
+        generateInvoice: async (_, {id}, context) => {
+            if (!context.isValid) {
+                throw new GraphQLError('User is not authenticated', {
+                    extensions: {
+                        code: 'UNAUTHENTICATED',
+                        http: {status: 401},
+                    },
+                });
+            }
+            const timeSheet = await collection.findOne({_id: new ObjectId(id)})
+            const joining = await joiningCollection.findOne({_id: new ObjectId(timeSheet.joining)})
+            const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
+            const company = await companyCollection.findOne({_id: new ObjectId(joining.company)})
+            const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
+            const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
+            let invoiceNumber = existingInvoice >= 0 ? existingInvoice + 1 : joining.invoices ? joining.invoices.length + 1 : 1
+            invoiceNumber = invoiceNumber.toString().padStart(4, '0')
+            const regHours = _getStandardHours(timeSheet.timeSheet)
+            const otHours = _getOTHours(timeSheet.timeSheet)
+            const data = {
+                invoiceNo: invoiceNumber,
+                cdLabel: dayjs().format('MM/DD/YYYY'),
+                toCompanyName: vendor.name,
+                toAdrs1: vendor.addressLine1,
+                toAdrs2: vendor.addressLine2,
+                toAdrs3: vendor.addressLine3,
+                monthLabel: dayjs(timeSheet.month).format('MMMM YYYY'),
+                ddLabel: dayjs().add(joining.paymentTerms, 'day').format('MM/DD/YYYY dddd').toUpperCase(),
+                totalRegHrs: regHours,
+                rate: (joining.candidateRate.rate).toFixed(2),
+                regularHrAmt: (joining.candidateRate.rate * regHours).toFixed(2),
+                totalExtraHrs: otHours,
+                extraRate: joining.candidateRate.otRate.toFixed(2),
+                overtimeHrAmt: (joining.candidateRate.otRate * otHours).toFixed(2),
+                totalAmt: ((joining.candidateRate.otRate * otHours) + (joining.candidateRate.rate * regHours)).toFixed(2),
+                fromName: candidate.name,
+                fromPhone: candidate.contact,
+            }
+            const filename = "invoice " + invoiceNumber.toString().padStart(4, '0') + ".pdf"
+            await generateInvoicePDF(data, company.invoiceFormat, filename, 'invoice')
+            if (existingInvoice === -1)
+                await joiningCollection.updateOne({_id: joining._id}, {
+                    $push: {
+                        invoices: {
+                            name: filename,
+                            month: timeSheet.month
+                        }
+                    }
+                })
             return "success"
         }
     }

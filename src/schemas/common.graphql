@@ -70,6 +70,7 @@ type Options{
 extend type Query {
     documents(ownerId: String!, pageNum: Int, pageSize: Int): PaginatedDocuments
     getTimeSheetFormats: [Options]
+    getInvoiceFormats: [Options]
 }
 
 extend type Mutation {

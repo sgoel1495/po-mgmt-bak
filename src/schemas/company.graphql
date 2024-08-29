@@ -6,6 +6,7 @@ type Company {
     addressLine2: String,
     addressLine3: String,
     bank: Bank!,
+    invoiceFormat: String
 }
 
 input CompanyInput {
@@ -15,6 +16,7 @@ input CompanyInput {
     addressLine2: String,
     addressLine3: String,
     bank: BankInput!,
+    invoiceFormat: String
 }
 
 type PaginatedCompany {
