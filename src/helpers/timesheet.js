@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-
+import utc from 'dayjs/plugin/utc.js'
+dayjs.extend(utc)
 const _sumOfAllItems = (arr) => arr.reduce((acc, cur) => acc + cur, 0)
 
 export const _getTotalHours = (arr) => arr.reduce((acc, cur) => acc + (cur.standardHours ?? 0) + (cur.OTHours ?? 0), 0)
@@ -24,7 +25,7 @@ export function _generateMonthArray(timesheetMonth, timecard) {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-        const hoursWorked = timecard.find((item) => dayjs(item.date).format('YYYY-MM-DD') === dayjs(timesheetMonth).set('date', day).format('YYYY-MM-DD'));
+        const hoursWorked = timecard.find((item) => dayjs(item.date).utc().format('YYYY-MM-DD') === dayjs(timesheetMonth).set('date', day).format('YYYY-MM-DD'));
         const stHours = hoursWorked?.standardHours ? hoursWorked.standardHours : 0
         const otHours = hoursWorked?.OTHours ? hoursWorked.OTHours : 0
 
