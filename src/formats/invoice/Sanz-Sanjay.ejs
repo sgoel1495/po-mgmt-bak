@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .invoice-container {
+            size: Letter portrait;
+            height: 279.3mm;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+
+        .header {
+            background-color: #002c77;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .company-logo {
+            max-width: 150px;
+        }
+
+        .header .company-info {
+            text-align: right;
+        }
+
+        .header .company-info p {
+            margin: 2px 0;
+        }
+
+        .bill-to {
+            text-align: right;
+        }
+
+        .invoice-details {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .invoice-details div, .bill-to div {
+            width: 48%;
+        }
+
+        .invoice-details h3, .bill-to h3 {
+            color: #002c77;
+            margin-bottom: 10px;
+        }
+
+        .invoice-details p, .bill-to p {
+            margin: 5px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background-color: #002c77;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: right;
+        }
+
+        .table td:first-child {
+            text-align: left;
+        }
+        .table td:nth-child(2) {
+            text-align: left;
+        }
+
+        .terms, .total {
+            margin: 20px 0;
+        }
+
+        .terms{
+            margin-top: 0;
+        }
+
+        .total {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 3rem;
+            grid-row-gap: 0.5rem;
+        }
+
+        .total p {
+            margin: 5px 0;
+        }
+
+        .footer {
+            background-color: #002c77;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            justify-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-container">
+    <div class="header">
+        <div class="company-logo">
+            <div style="font-size: 3rem"><strong>Invoice</strong></div>
+        </div>
+        <div class="company-info">
+            <p><strong>SANZ IT INC</strong></p>
+            <p>100 Harts field Center Pkwy #500</p>
+            <p>Atlanta, GA 30354</p>
+            <p><%= fromPhone%></p>
+        </div>
+    </div>
+    <div style="margin: 0 1.5rem; flex:1;">
+        <div class="invoice-details">
+            <div>
+                <h3>INVOICE DETAILS:</h3>
+                <p><strong>Invoice #:</strong> <%= invoiceNo%></p>
+                <p><strong>Date of Issue:</strong> <%= cdLabel%></p>
+                <p><strong>Due Date:</strong> <%= ddLabel%></p>
+                <p><strong>Comments:</strong> Invoice for <%= monthLabel%></p>
+            </div>
+            <div class="bill-to">
+                <h3>BILL TO:</h3>
+                <p><strong><%= toCompanyName%></strong></p>
+                <p><%= toAdrs1%></p>
+                <p><%= toAdrs2%></p>
+                <p><%= toAdrs3%></p>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>QUANTITY</th>
+                <th>DESCRIPTION</th>
+                <th>UNIT PRICE</th>
+                <th>TOTAL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><%= totalRegHrs%></td>
+                <td>Working Hours</td>
+                <td><%= rate%></td>
+                <td><%= regularHrAmt%></td>
+            </tr>
+            <tr>
+                <td><%= totalExtraHrs%></td>
+                <td>Overtime</td>
+                <td><%= extraRate%></td>
+                <td><%= overtimeHrAmt%></td>
+            </tr>
+            <tr>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+            </tr>
+            <tr>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+                <td><br/></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start">
+            <div class="terms">
+                <p style="text-indent: 0pt;text-align: left;">Make all ACH transfers to SANZ IT INC</p>
+                <p style="text-indent: 0pt;text-align: left;">If you have any questions concerning this invoice,
+                    contact: <%= fromName %> at <%= fromPhone %>.</p>
+                <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
+                <h3 style="margin: 0">TERMS</h3>
+                <ul id="l1" style="padding-left: 14pt; width: 75%">
+                    <li data-list-text="•">
+                        <p style="">
+                            Settlement of all invoices is required by their designated due dates.
+                        </p>
+                    </li>
+                    <li data-list-text="•">
+                        <p style="">
+                            In the event that a due date coincides with a weekend or public holiday, payment must be disbursed on the preceding business day to ensure timely processing.
+                        </p>
+                    </li>
+                    <li data-list-text="•">
+                        <p style="">
+                            Non-adherence to payment deadlines may incur a daily late payment charge of 11%, which will be appended to the subsequent invoice.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="total">
+                <strong>Subtotal:</strong> <span><%= totalAmt%></span>
+                <strong>Tax:</strong> <span>00.00</span>
+                <strong>TOTAL:</strong> <span><%= totalAmt%></span>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="footer">
+    </div>
+</div>
+
+</body>
+</html>
