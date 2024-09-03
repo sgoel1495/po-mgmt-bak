@@ -9,7 +9,6 @@ import {candidateCollection} from "./candidateResolvers.js";
 import {openingsCollection} from "./openingsResolvers.js";
 import {_generateMonthArray, _getOTHours, _getStandardHours, _getTotalHours} from "../helpers/timesheet.js";
 import {config} from "../config/index.js";
-import {companyCollection} from "./companyResolvers.js";
 import {vendorCollection} from "./vendorResolvers.js";
 import timezone from 'dayjs/plugin/timezone.js'
 import utc from 'dayjs/plugin/utc.js'
@@ -81,17 +80,9 @@ export const TimeSheetResolvers = {
                 reportingEmail: joining.timesheetApprover.email,
                 endClientName: opening.endClient,
                 endClientLocation: opening.location,
-                creationDate: timeSheet.submissionDate.toLocaleDateString('en-US', {
-                    month: '2-digit',
-                    day: '2-digit',
-                    year: 'numeric'
-                }),
+                creationDate: dayjs(timeSheet.submissionDate).utc().format('MM/DD/YYYY'),
                 status: timeSheet.status,
-                approvalDate: timeSheet.approvalDate.toLocaleDateString('en-US', {
-                    month: '2-digit',
-                    day: '2-digit',
-                    year: 'numeric'
-                }),
+                approvalDate: dayjs(timeSheet.approvalDate).utc().format('MM/DD/YYYY'),
                 timecardGridObject: _generateMonthArray(timeSheet.month, timeSheet.timeSheet),
                 totalRegHrs: _getStandardHours(timeSheet.timeSheet),
                 totalHrs: _getTotalHours(timeSheet.timeSheet),
