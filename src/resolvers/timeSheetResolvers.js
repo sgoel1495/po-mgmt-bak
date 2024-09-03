@@ -106,7 +106,6 @@ export const TimeSheetResolvers = {
             const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
             const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
             let invoiceNumber = existingInvoice >= 0 ? existingInvoice + 1 : joining.invoices ? joining.invoices.length + 1 : 1
-            invoiceNumber = invoiceNumber.toString().padStart(4, '0')
             const regHours = _getStandardHours(timeSheet.timeSheet)
             const otHours = _getOTHours(timeSheet.timeSheet)
             let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')

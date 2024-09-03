@@ -169,7 +169,7 @@
 <p style="text-indent: 0pt;text-align: left;"><br></p>
 
 <p class="s4" style="line-height: 109%;text-align: right;">
-    INVOICE #<%= invoiceNo %>
+    INVOICE #<%= invoiceNo.toString().padStart(4, "0") %>
 </p>
 <p class="s4" style="line-height: 109%;text-align: right;">
     DATE:<%= cdLabel %>
