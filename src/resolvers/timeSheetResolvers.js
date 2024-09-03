@@ -123,6 +123,7 @@ export const TimeSheetResolvers = {
                 toAdrs3: vendor.addressLine3,
                 monthLabel: dayjs(timeSheet.month).format('MMMM YYYY'),
                 ddLabel: dueDate.format('MM/DD/YYYY dddd').toUpperCase(),
+                ddLabel2: dueDate.format('MM/DD/YYYY').toUpperCase(),
                 totalRegHrs: regHours,
                 rate: (joining.candidateRate.rate).toFixed(2),
                 regularHrAmt: (joining.candidateRate.rate * regHours).toFixed(2),
