@@ -87,9 +87,6 @@
         .table td:first-child {
             text-align: left;
         }
-        .table td:nth-child(2) {
-            text-align: left;
-        }
 
         .terms, .total {
             margin: 20px 0;
@@ -140,7 +137,6 @@
                 <p><strong>Invoice #:</strong> <%= invoiceNo%></p>
                 <p><strong>Date of Issue:</strong> <%= cdLabel%></p>
                 <p><strong>Due Date:</strong> <%= ddLabel%></p>
-                <p><strong>Comments:</strong> Invoice for <%= monthLabel%></p>
             </div>
             <div class="bill-to">
                 <h3>BILL TO:</h3>
@@ -189,10 +185,6 @@
         </table>
         <div style="display: flex; justify-content: space-between; align-items: flex-start">
             <div class="terms">
-                <p style="text-indent: 0pt;text-align: left;">Make all ACH transfers to SANZ IT INC</p>
-                <p style="text-indent: 0pt;text-align: left;">If you have any questions concerning this invoice,
-                    contact: <%= fromName %> at <%= fromPhone %>.</p>
-                <p style="padding-top: 5pt;text-indent: 0pt;text-align: left;"><br></p>
                 <h3 style="margin: 0">TERMS</h3>
                 <ul id="l1" style="padding-left: 14pt; width: 75%">
                     <li data-list-text="•">
@@ -216,8 +208,11 @@
                             <br/>
                             <br/>
                             <strong>Account Name: </strong> Sanz IT Inc
+                            <br/>
                             <strong>Bank Name: </strong> Coastal Community Bank
+                            <br/>
                             <strong>Account Number: </strong> 875106064376
+                            <br/>
                             <strong>Routing Number: </strong> 125109019
                         </p>
                     </li>

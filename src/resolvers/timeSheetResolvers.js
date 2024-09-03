@@ -111,7 +111,7 @@ export const TimeSheetResolvers = {
             const otHours = _getOTHours(timeSheet.timeSheet)
             let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')
             if(joining.fixedMonthDate){
-                dueDate = dayjs().set("month",dayjs(timeSheet.month).get("month")+1).set("day",joining.paymentTerms)
+                dueDate = dayjs().set("month",dayjs(timeSheet.month).get("month")+1).set("date",joining.paymentTerms)
             }
             let contact = candidate.contact.replace("+1","")
             contact = contact.slice(0,3)+"-"+contact.slice(3,6)+"-"+contact.slice(6)
