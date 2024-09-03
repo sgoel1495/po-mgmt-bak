@@ -154,23 +154,23 @@
         <table class="table">
             <thead>
             <tr>
-                <th>QUANTITY</th>
                 <th>DESCRIPTION</th>
                 <th>UNIT PRICE</th>
+                <th>QUANTITY</th>
                 <th>TOTAL</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><%= totalRegHrs%></td>
                 <td>Working Hours</td>
                 <td><%= rate%></td>
+                <td><%= totalRegHrs%></td>
                 <td><%= regularHrAmt%></td>
             </tr>
             <tr>
-                <td><%= totalExtraHrs%></td>
                 <td>Overtime</td>
                 <td><%= extraRate%></td>
+                <td><%= totalExtraHrs%></td>
                 <td><%= overtimeHrAmt%></td>
             </tr>
             <tr>
@@ -197,17 +197,28 @@
                 <ul id="l1" style="padding-left: 14pt; width: 75%">
                     <li data-list-text="•">
                         <p style="">
-                            Settlement of all invoices is required by their designated due dates.
+                            If the due date falls on a weekend or public holiday, then payment must be cleared on the last working day before that.
                         </p>
                     </li>
                     <li data-list-text="•">
                         <p style="">
-                            In the event that a due date coincides with a weekend or public holiday, payment must be disbursed on the preceding business day to ensure timely processing.
+                            If you miss the payment dates, a daily late fee of 2% will be added to your next bill.
                         </p>
                     </li>
                     <li data-list-text="•">
                         <p style="">
-                            Non-adherence to payment deadlines may incur a daily late payment charge of 11%, which will be appended to the subsequent invoice.
+                            All payments should be made out to SANZ IT INC.
+                        </p>
+                    </li>
+                    <li data-list-text="•">
+                        <p style="">
+                            All ACH Transfers should be made to the following account.
+                            <br/>
+                            <br/>
+                            <strong>Account Name: </strong> Sanz IT Inc
+                            <strong>Bank Name: </strong> Coastal Community Bank
+                            <strong>Account Number: </strong> 875106064376
+                            <strong>Routing Number: </strong> 125109019
                         </p>
                     </li>
                 </ul>

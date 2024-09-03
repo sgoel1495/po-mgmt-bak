@@ -20,7 +20,8 @@ type Joining {
     client: Client!,
     timesheetApprover: Person,
     invoices: [Invoices],
-    invoiceFormat: String
+    invoiceFormat: String,
+    fixedMonthDate: Boolean
 }
 
 input JoiningInput {
@@ -38,7 +39,8 @@ input JoiningInput {
     candidateRate: RateInput!,
     client: ObjectID!,
     timesheetApprover: PersonInput,
-    invoiceFormat: String
+    invoiceFormat: String,
+    fixedMonthDate: Boolean
 }
 
 input JoiningUpdateInput {
@@ -54,7 +56,8 @@ input JoiningUpdateInput {
     vendorRate: RateInput!,
     candidateRate: RateInput!,
     timesheetApprover: PersonInput,
-    invoiceFormat: String
+    invoiceFormat: String,
+    fixedMonthDate: Boolean
 }
 
 type JoiningOpening {

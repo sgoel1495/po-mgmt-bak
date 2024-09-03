@@ -109,6 +109,12 @@ export const TimeSheetResolvers = {
             invoiceNumber = invoiceNumber.toString().padStart(4, '0')
             const regHours = _getStandardHours(timeSheet.timeSheet)
             const otHours = _getOTHours(timeSheet.timeSheet)
+            let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')
+            if(joining.fixedMonthDate){
+                dueDate = dayjs().set("month",dayjs(timeSheet.month).get("month")+1).set("day",joining.paymentTerms)
+            }
+            let contact = candidate.contact.replace("+1","")
+            contact = contact.slice(0,3)+"-"+contact.slice(3,6)+"-"+contact.slice(6)
             const data = {
                 invoiceNo: invoiceNumber,
                 cdLabel: dayjs().tz("America/Toronto").format('MM/DD/YYYY'),
@@ -117,7 +123,7 @@ export const TimeSheetResolvers = {
                 toAdrs2: vendor.addressLine2,
                 toAdrs3: vendor.addressLine3,
                 monthLabel: dayjs(timeSheet.month).format('MMMM YYYY'),
-                ddLabel: dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day').format('MM/DD/YYYY dddd').toUpperCase(),
+                ddLabel: dueDate.format('MM/DD/YYYY dddd').toUpperCase(),
                 totalRegHrs: regHours,
                 rate: (joining.candidateRate.rate).toFixed(2),
                 regularHrAmt: (joining.candidateRate.rate * regHours).toFixed(2),
@@ -126,7 +132,7 @@ export const TimeSheetResolvers = {
                 overtimeHrAmt: (joining.candidateRate.otRate * otHours).toFixed(2),
                 totalAmt: ((joining.candidateRate.otRate * otHours) + (joining.candidateRate.rate * regHours)).toFixed(2),
                 fromName: candidate.name,
-                fromPhone: candidate.contact,
+                fromPhone: contact,
             }
             const filename = `invoice ${invoiceNumber.toString().padStart(4, '0')}_${joining._id}.pdf`
             await generateInvoicePDF(data, joining.invoiceFormat, filename, 'invoice')
