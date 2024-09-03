@@ -92,7 +92,7 @@
             margin: 20px 0;
         }
 
-        .terms{
+        .terms {
             margin-top: 0;
         }
 
@@ -127,23 +127,23 @@
             <p><strong>SANZ IT INC</strong></p>
             <p>100 Harts field Center Pkwy #500</p>
             <p>Atlanta, GA 30354</p>
-            <p><%= fromPhone%></p>
+            <p><%= fromPhone %></p>
         </div>
     </div>
     <div style="margin: 0 1.5rem; flex:1;">
         <div class="invoice-details">
             <div>
                 <h3>INVOICE DETAILS:</h3>
-                <p><strong>Invoice #:</strong> <%= invoiceNo%></p>
-                <p><strong>Date of Issue:</strong> <%= cdLabel%></p>
-                <p><strong>Due Date:</strong> <%= ddLabel%></p>
+                <p><strong>Invoice #:</strong> <%= invoiceNo %></p>
+                <p><strong>Date of Issue:</strong> <%= cdLabel %></p>
+                <p><strong>Due Date:</strong> <%= ddLabel %></p>
             </div>
             <div class="bill-to">
                 <h3>BILL TO:</h3>
-                <p><strong><%= toCompanyName%></strong></p>
-                <p><%= toAdrs1%></p>
-                <p><%= toAdrs2%></p>
-                <p><%= toAdrs3%></p>
+                <p><strong><%= toCompanyName %></strong></p>
+                <p><%= toAdrs1 %></p>
+                <p><%= toAdrs2 %></p>
+                <p><%= toAdrs3 %></p>
             </div>
         </div>
 
@@ -159,15 +159,15 @@
             <tbody>
             <tr>
                 <td>Working Hours</td>
-                <td><%= rate%></td>
-                <td><%= totalRegHrs%></td>
-                <td><%= regularHrAmt%></td>
+                <td><%= rate %></td>
+                <td><%= totalRegHrs %></td>
+                <td><%= regularHrAmt %></td>
             </tr>
             <tr>
                 <td>Overtime</td>
-                <td><%= extraRate%></td>
-                <td><%= totalExtraHrs%></td>
-                <td><%= overtimeHrAmt%></td>
+                <td><%= extraRate %></td>
+                <td><%= totalExtraHrs %></td>
+                <td><%= overtimeHrAmt %></td>
             </tr>
             <tr>
                 <td><br/></td>
@@ -183,49 +183,48 @@
             </tr>
             </tbody>
         </table>
-        <div style="display: flex; justify-content: space-between; align-items: flex-start">
-            <div class="terms">
-                <h3 style="margin: 0">TERMS</h3>
-                <ul id="l1" style="padding-left: 14pt; width: 75%">
-                    <li data-list-text="•">
-                        <p style="">
-                            If the due date falls on a weekend or public holiday, then payment must be cleared on the last working day before that.
-                        </p>
-                    </li>
-                    <li data-list-text="•">
-                        <p style="">
-                            If you miss the payment dates, a daily late fee of 2% will be added to your next bill.
-                        </p>
-                    </li>
-                    <li data-list-text="•">
-                        <p style="">
-                            All payments should be made out to SANZ IT INC.
-                        </p>
-                    </li>
-                    <li data-list-text="•">
-                        <p style="">
-                            All ACH Transfers should be made to the following account.
-                            <br/>
-                            <br/>
-                            <strong>Account Name: </strong> Sanz IT Inc
-                            <br/>
-                            <strong>Bank Name: </strong> Coastal Community Bank
-                            <br/>
-                            <strong>Account Number: </strong> 875106064376
-                            <br/>
-                            <strong>Routing Number: </strong> 125109019
-                        </p>
-                    </li>
-                </ul>
-            </div>
-
+        <div style="display: flex; justify-content: flex-end; align-items: flex-start">
             <div class="total">
-                <strong>Subtotal:</strong> <span><%= totalAmt%></span>
+                <strong>Subtotal:</strong> <span><%= totalAmt %></span>
                 <strong>Tax:</strong> <span>00.00</span>
-                <strong>TOTAL:</strong> <span><%= totalAmt%></span>
+                <strong>TOTAL:</strong> <span><%= totalAmt %></span>
             </div>
         </div>
 
+        <div class="terms">
+            <h3 style="margin: 0">TERMS</h3>
+            <ul id="l1" style="padding-left: 14pt;">
+                <li data-list-text="•">
+                    <p style="">
+                        If the due date falls on a weekend or public holiday, then payment must be cleared on the last
+                        working day before that.
+                    </p>
+                </li>
+                <li data-list-text="•">
+                    <p style="">
+                        All payments should be made out to SANZ IT INC.
+                    </p>
+                </li>
+                <li data-list-text="•">
+                    <p style="">
+                        All ACH Transfers should be made to the following account.
+                        <br/>
+                        <br/>
+                        <strong>Account Name: </strong> Sanz IT Inc
+                        <br/>
+                        <strong>Account Type: </strong> Checking Account
+                        <br/>
+                        <strong>Bank Name: </strong> Wells Fargo
+                        <br/>
+                        <strong>Bank Address: </strong> MAC N9301-041, Minneapolis, MN, 55479
+                        <br/>
+                        <strong>Account Number: </strong> 8242280975
+                        <br/>
+                        <strong>Routing Number: </strong> 122000247
+                    </p>
+                </li>
+            </ul>
+        </div>
 
     </div>
 
