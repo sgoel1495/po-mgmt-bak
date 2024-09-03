@@ -112,7 +112,6 @@ export const TimeSheetResolvers = {
             const timeSheet = await collection.findOne({_id: new ObjectId(id)})
             const joining = await joiningCollection.findOne({_id: new ObjectId(timeSheet.joining)})
             const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
-            const company = await companyCollection.findOne({_id: new ObjectId(joining.company)})
             const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
             const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
             let invoiceNumber = existingInvoice >= 0 ? existingInvoice + 1 : joining.invoices ? joining.invoices.length + 1 : 1
@@ -138,8 +137,8 @@ export const TimeSheetResolvers = {
                 fromName: candidate.name,
                 fromPhone: candidate.contact,
             }
-            const filename = "invoice " + invoiceNumber.toString().padStart(4, '0') + ".pdf"
-            await generateInvoicePDF(data, company.invoiceFormat, filename, 'invoice')
+            const filename = `invoice ${invoiceNumber.toString().padStart(4, '0')}_${joining._id}.pdf`
+            await generateInvoicePDF(data, joining.invoiceFormat, filename, 'invoice')
             if (existingInvoice === -1)
                 await joiningCollection.updateOne({_id: joining._id}, {
                     $push: {

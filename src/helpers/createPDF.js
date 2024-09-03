@@ -28,7 +28,6 @@ export const generateTimesheetPDF = async (data, templateName, name) => {
 export const generateInvoicePDF = async (data, templateName, name) => {
     const templatePath = new URL(templateName, config.invoiceFormatsDirectoryUrl);
     const html = _generateHtml(data, templatePath);
-    await saveData(html, name + ".html")
     const resp = await axios.post("https://bench-sales-2giio5eruq-ue.a.run.app/api/v1/doc", {
         html,
         removeFormat: true,
