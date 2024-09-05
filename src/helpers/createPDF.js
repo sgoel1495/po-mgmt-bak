@@ -14,7 +14,12 @@ export const generateTimesheetPDF = async (data, templateName, name) => {
     const templatePath = new URL(templateName, config.timesheetFormatsDirectoryUrl);
     const templateFooterPath = new URL(templateName, config.timesheetFooterFormatsDirectoryUrl);
     const html = _generateHtml(data, templatePath);
-    const footer = fs.readFileSync(templateFooterPath, 'utf8')
+    let footer = fs.readFileSync(templateFooterPath, 'utf8')
+    if(footer){
+        footer = _generateHtml(data, templateFooterPath);
+    } else {
+        footer= '<span></span>'
+    }
     const resp = await axios.post("https://bench-sales-2giio5eruq-ue.a.run.app/api/v1/doc", {
         html,
         removeFormat: true,
@@ -27,11 +32,19 @@ export const generateTimesheetPDF = async (data, templateName, name) => {
 }
 export const generateInvoicePDF = async (data, templateName, name) => {
     const templatePath = new URL(templateName, config.invoiceFormatsDirectoryUrl);
+    const templateFooterPath = new URL(templateName, config.timesheetFooterFormatsDirectoryUrl);
     const html = _generateHtml(data, templatePath);
+    let footer = fs.readFileSync(templateFooterPath, 'utf8')
+    if(footer){
+        footer = _generateHtml(data, templateFooterPath);
+    } else {
+        footer= '<span></span>'
+    }
+
     const resp = await axios.post("https://bench-sales-2giio5eruq-ue.a.run.app/api/v1/doc", {
         html,
         removeFormat: true,
-        footer: '<span></span>'
+        footer: footer
     }, {
         contentType: 'text/html',
         responseType: 'arraybuffer',
