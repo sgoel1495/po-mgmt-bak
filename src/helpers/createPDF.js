@@ -32,7 +32,7 @@ export const generateTimesheetPDF = async (data, templateName, name) => {
 }
 export const generateInvoicePDF = async (data, templateName, name) => {
     const templatePath = new URL(templateName, config.invoiceFormatsDirectoryUrl);
-    const templateFooterPath = new URL(templateName, config.timesheetFooterFormatsDirectoryUrl);
+    const templateFooterPath = new URL(templateName, config.invoiceFooterFormatsDirectoryUrl);
     const html = _generateHtml(data, templatePath);
     let footer = fs.readFileSync(templateFooterPath, 'utf8')
     if(footer){

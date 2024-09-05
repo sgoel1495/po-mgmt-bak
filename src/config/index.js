@@ -15,5 +15,6 @@ export const config = {
     timesheetFormatsDirectoryUrl:  new URL(process.env.TIMESHEET_FORMATS_DIRECTORY_URL, import.meta.url),
     invoiceFormatsDirectoryUrl:  new URL(process.env.INVOICE_FORMATS_DIRECTORY_URL, import.meta.url),
     timesheetFooterFormatsDirectoryUrl:  new URL(process.env.TIMESHEET_FOOTER_FORMATS_DIRECTORY_URL, import.meta.url),
+    invoiceFooterFormatsDirectoryUrl:  new URL(process.env.INVOICE_FOOTER_FORMATS_DIRECTORY_URL, import.meta.url),
     mediaHost: process.env.MEDIA_HOST,
 };
