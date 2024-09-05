@@ -105,7 +105,7 @@
                 <strong>Invoice Date :</strong>
             </div>
             <div style="display: flex; flex-direction: column; align-items: flex-start; row-gap: 3px">
-                <p> PRY<%= invoiceNo.toString().padStart(4, "0")%></p>
+                <p> PRY<%= invoiceNo.toString().padStart(2, "0")%></p>
                 <p> <%= cdLabel%></p>
             </div>
         </div>
@@ -116,7 +116,6 @@
                 <h3>Prydan Inc</h3>
                 <p>118-35 Quens Blvd. #400</p>
                 <p>Forest Hills, NY 11375</p>
-                <p><%= fromPhone%></p>
             </div>
             <div style="align-self: center">
                 Bill To
@@ -133,10 +132,10 @@
             <table>
                 <thead>
                 <tr style="width: 100%">
-                    <th style="width: 70%">Particulars</th>
-                    <th style="width: 10%">Hr Rate</th>
-                    <th style="width: 10%">OT Rate</th>
-                    <th style="width: 10%">Total</th>
+                    <th style="width: 55%">Particulars</th>
+                    <th style="width: 15%">Rate</th>
+                    <th style="width: 15%">OT Rate</th>
+                    <th style="width: 15%">Total</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -180,7 +179,7 @@
                 <div>
                     <h3>Invoice #</h3>
                     <p>
-                        PRY<%= invoiceNo.toString().padStart(4, "0")%>
+                        PRY<%= invoiceNo.toString().padStart(2, "0")%>
                     </p>
                     <h3>Status</h3>
                     <p>
