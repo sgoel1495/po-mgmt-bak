@@ -34,11 +34,9 @@ export const generateInvoicePDF = async (data, templateName, name) => {
     const templatePath = new URL(templateName, config.invoiceFormatsDirectoryUrl);
     const templateFooterPath = new URL(templateName, config.invoiceFooterFormatsDirectoryUrl);
     const html = _generateHtml(data, templatePath);
-    let footer = fs.readFileSync(templateFooterPath, 'utf8')
-    if(footer){
+    let footer = '<span></span>'
+    if(fs.existsSync(templateFooterPath)){
         footer = _generateHtml(data, templateFooterPath);
-    } else {
-        footer= '<span></span>'
     }
 
     const resp = await axios.post("https://bench-sales-2giio5eruq-ue.a.run.app/api/v1/doc", {
