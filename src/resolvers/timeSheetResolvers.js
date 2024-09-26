@@ -111,7 +111,7 @@ export const TimeSheetResolvers = {
             const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
             const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
             const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
-            let invoiceNumber = existingInvoice >= 0 ? joining.invoices.find((item) => item.month === timeSheet.month).number + 1 : joining.invoices ? allinvoices.length + 1 : 1
+            let invoiceNumber = existingInvoice >= 0 ? joining.invoices.find((item) => item.month === timeSheet.month).number : allinvoices.length + 1
             const regHours = _getStandardHours(timeSheet.timeSheet)
             const otHours = _getOTHours(timeSheet.timeSheet)
             let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')
