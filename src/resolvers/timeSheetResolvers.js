@@ -103,9 +103,11 @@ export const TimeSheetResolvers = {
             const timeSheet = await collection.findOne({_id: new ObjectId(id)})
             const joining = await joiningCollection.findOne({_id: new ObjectId(timeSheet.joining)})
             const invoiceJoinings = await joiningCollection.find({invoiceFormat: joining.invoiceFormat}).toArray()
-            const allinvoices = invoiceJoinings.reduce((acc,curr)=>{
-               return [...acc, ...curr.invoices]
-            },[])
+            const allinvoices = invoiceJoinings.reduce((acc, curr) => {
+                if (curr.invoices)
+                    return [...acc, ...curr.invoices]
+                return acc
+            }, [])
             const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
             const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
             const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
