@@ -1,6 +1,7 @@
 type Invoices {
     name: String,
-    month: String
+    month: String,
+    number: Int
 }
 
 type Joining {

@@ -102,18 +102,22 @@ export const TimeSheetResolvers = {
             }
             const timeSheet = await collection.findOne({_id: new ObjectId(id)})
             const joining = await joiningCollection.findOne({_id: new ObjectId(timeSheet.joining)})
+            const invoiceJoinings = await joiningCollection.find({invoiceFormat: joining.invoiceFormat}).toArray()
+            const allinvoices = invoiceJoinings.reduce((acc,curr)=>{
+               return [...acc, ...curr.invoices]
+            },[])
             const candidate = await candidateCollection.findOne({_id: new ObjectId(joining.candidate)})
             const vendor = await vendorCollection.findOne({_id: new ObjectId(joining.vendor)})
             const existingInvoice = joining.invoices ? joining.invoices.findIndex((item) => item.month === timeSheet.month) : -1
-            let invoiceNumber = existingInvoice >= 0 ? existingInvoice + 1 : joining.invoices ? joining.invoices.length + 1 : 1
+            let invoiceNumber = existingInvoice >= 0 ? joining.invoices.find((item) => item.month === timeSheet.month).number + 1 : joining.invoices ? allinvoices.length + 1 : 1
             const regHours = _getStandardHours(timeSheet.timeSheet)
             const otHours = _getOTHours(timeSheet.timeSheet)
             let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')
-            if(joining.fixedMonthDate){
-                dueDate = dayjs().set("month",dayjs(timeSheet.month).get("month")+1).set("date",joining.paymentTerms)
+            if (joining.fixedMonthDate) {
+                dueDate = dayjs().set("month", dayjs(timeSheet.month).get("month") + 1).set("date", joining.paymentTerms)
             }
-            let contact = candidate.contact.replace("+1","")
-            contact = contact.slice(0,3)+"-"+contact.slice(3,6)+"-"+contact.slice(6)
+            let contact = candidate.contact.replace("+1", "")
+            contact = contact.slice(0, 3) + "-" + contact.slice(3, 6) + "-" + contact.slice(6)
             const data = {
                 invoiceNo: invoiceNumber,
                 cdLabel: dayjs().tz("America/Toronto").format('MM/DD/YYYY'),
@@ -141,7 +145,8 @@ export const TimeSheetResolvers = {
                     $push: {
                         invoices: {
                             name: filename,
-                            month: timeSheet.month
+                            month: timeSheet.month,
+                            number: invoiceNumber
                         }
                     }
                 })
