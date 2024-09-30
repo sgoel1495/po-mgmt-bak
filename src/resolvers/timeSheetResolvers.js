@@ -115,7 +115,7 @@ export const TimeSheetResolvers = {
             let invoiceNumber = existingInvoice >= 0 ? joining.invoices.find((item) => item.month === timeSheet.month).number : allinvoices.length + 1
             const regHours = _getStandardHours(timeSheet.timeSheet)
             const otHours = _getOTHours(timeSheet.timeSheet)
-            let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms, 'day')
+            let dueDate = dayjs().tz("America/Toronto").add(joining.paymentTerms + 1, 'day')
             if (joining.fixedMonthDate) {
                 dueDate = dayjs().set("month", dayjs(timeSheet.month).get("month") + 1).set("date", joining.paymentTerms)
             }
@@ -123,7 +123,7 @@ export const TimeSheetResolvers = {
             contact = contact.slice(0, 3) + "-" + contact.slice(3, 6) + "-" + contact.slice(6)
             const data = {
                 invoiceNo: invoiceNumber,
-                cdLabel: dayjs().format('MM/DD/YYYY'),
+                cdLabel: dayjs().tz("America/Toronto").add(1, 'day').format('MM/DD/YYYY'),
                 toCompanyName: vendor.name,
                 toAdrs1: vendor.addressLine1,
                 toAdrs2: vendor.addressLine2,
