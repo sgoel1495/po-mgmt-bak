@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Invoice</title>
+    <style>
+        @page {
+            size: A4 portrait;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .invoice-container {
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 30px;
+            background-color: rgb(243, 243, 243);
+            border-top: 20px solid rgb(255, 87, 34);
+        }
+
+        .company-details {
+            width: 60%;
+        }
+
+        .invoice-details {
+            text-align: right;
+        }
+
+        .addresses {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .address {
+            width: 45%;
+            padding-left: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .body-container {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: rgb(243, 243, 243);
+        }
+
+        .table th {
+            background-color: rgb(255, 87, 34);
+            color: white;
+        }
+
+        .summary {
+            flex: 1;
+            text-align: right;
+        }
+
+        .balance {
+            background-color: #e0f7fa;
+            padding: 10px;
+            text-align: right;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="company-details">
+            <p><strong>Bayersoft INC</strong></p>
+            <p>9073 Sutphin BLVD.</p>
+            <p>Jamaica, NY 11435</p>
+            <p>chackochristophersatya@gmail.com</p>
+        </div>
+        <div class="invoice-details">
+            <p><strong>INVOICE</strong></p>
+            <p>Date: <%= cdLabel%></p>
+            <p>Invoice No: <%= invoiceNo.toString().padStart(4, "0")%></p>
+        </div>
+    </div>
+
+    <!-- Billing & Shipping -->
+    <div class="addresses">
+        <div class="address">
+            <p style=" border-bottom: 2px solid rgb(205,205,205)">
+                <strong style="color: rgb(31,56,100);">BILL TO</strong>
+            </p>
+            <p><%= toCompanyName%></p>
+            <p><%= toAdrs1%></p>
+            <p><%= toAdrs2%></p>
+            <p><%= toAdrs3%></p>
+        </div>
+        <div>
+            Due on <%= ddLabel %>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="body-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>QTY</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Working Hours</td>
+                <td><%= totalRegHrs %></td>
+                <td><%= rate %></td>
+                <td><%= regularHrAmt %></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div style="display: flex">
+            <div style="flex: 1">
+                <p>Terms:</p>
+                <ul id="l1" style="padding-left: 14pt;">
+                    <li data-list-text="•">
+                        <p style="">
+                            All invoices must be paid by their specified due dates.
+                        </p>
+                    </li>
+                    <li data-list-text="•">
+                        <p style="">
+                            If a payment due date falls on a weekend or public holiday, the payment must be made on the prior business day to ensure timely processing.
+                        </p>
+                    </li>
+                    <li data-list-text="•">
+                        <p style="">
+                            Failure to meet payment deadlines may result in a daily late fee of 11%, which will be added to the next invoice.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="summary">
+                <div style="display: flex">
+                    <div style="flex: 1">
+                        <p>Subtotal:&nbsp;</p>
+                        <p>Tax:&nbsp;</p>
+                        <p>Total:&nbsp;</p>
+                    </div>
+                    <div>
+                        <p>$<%= regularHrAmt %></p>
+                        <p>$0.00</p>
+                        <p>$<%= regularHrAmt %>0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Balance -->
+        <div class="balance">
+            Balance Due: $<%= regularHrAmt %>
+        </div>
+    </div>
+
+    <!-- Summary -->
+</div>
+
+</body>
+</html>
