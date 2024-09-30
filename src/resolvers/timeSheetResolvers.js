@@ -80,6 +80,7 @@ export const TimeSheetResolvers = {
                 reportingEmail: joining.timesheetApprover.email,
                 endClientName: opening.endClient,
                 endClientLocation: opening.location,
+                designation: opening.name,
                 creationDate: dayjs(timeSheet.submissionDate).utc().format('MM/DD/YYYY'),
                 status: timeSheet.status,
                 approvalDate: dayjs(timeSheet.approvalDate).utc().format('MM/DD/YYYY'),

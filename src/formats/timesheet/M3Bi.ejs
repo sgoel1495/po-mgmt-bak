@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Timesheet</title>
+    <style type="text/css">
+        @page {
+            size: A4 portrait;
+            margin: 40pt;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
+        }
+
+        .s1 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 14pt;
+        }
+
+        .s2 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 22pt;
+        }
+
+        .s3 {
+            color: #7F7F7F;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s4 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s5 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 13pt;
+        }
+
+        p {
+            color: #7F7F7F;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 11pt;
+            margin: 0pt;
+        }
+
+        .s6 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s7 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 13pt;
+        }
+
+        .s8 {
+            color: black;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 11pt;
+        }
+
+        .s9 {
+            color: #7F7F7F;
+            font-family: Arial, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 10pt;
+        }
+
+        table, tbody {
+            vertical-align: top;
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+<div class="textbox"
+     style="background:#F1F1F1;border:0.5pt solid #BEBEBE;display:block;min-height:98.8pt;width:478.8pt;"><p class="s1"
+                                                                                                             style="padding-top: 10pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
+        Time Card</p>
+    <p class="s2" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= employeeName %></p>
+    <p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Period <span
+                style=" color: #000;">16-Sep-2024 - 22-Sep-2024 </span>Person Number <span
+                style=" color: #000;"><%= cid %></span></p></div>
+<p style="padding-left: 6pt;text-indent: 0pt;text-align: left;"/>
+<p style="padding-top: 4pt;text-indent: 0pt;text-align: left;"><br/></p>
+<p class="s5" style="padding-left: 7pt;text-indent: 0pt;text-align: left;">Person Information</p>
+<p style="padding-top: 11pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Assignment Number Manager</p>
+<p class="s6" style="padding-left: 7pt;text-indent: 0pt;text-align: left;">E<%= cid %> <%= reportingManager %></p>
+<p style="padding-top: 11pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Job Position</p>
+<p class="s6" style="padding-top: 1pt;padding-left: 7pt;text-indent: 0pt;text-align: left;"><%= designation %></p>
+<p style="padding-top: 11pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">Location Department</p>
+<p class="s6" style="padding-left: 7pt;text-indent: 0pt;text-align: left;"><%= endClientLocation %> <%= endClientName
+    %></p>
+<p style="text-indent: 0pt;text-align: left;"><br/></p>
+<table style="border-collapse:collapse;margin-left:5pt" cellspacing="0">
+    <tr style="height:21pt">
+        <td style="width:148pt"><p class="s7"
+                                   style="padding-left: 2pt;text-indent: 0pt;line-height: 15pt;text-align: left;">Time
+                Card Details</p></td>
+        <td style="width:184pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+        <td style="width:96pt" rowspan="5"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+    </tr>
+    <tr style="height:37pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-top: 5pt;padding-left: 2pt;padding-right: 16pt;text-indent: 0pt;text-align: left;">
+                Time Card Status <span style=" color: #000;"><%= status %></span></p></td>
+        <td style="width:184pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+    </tr>
+    <tr style="height:24pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
+                Overtime Day Start Time</p></td>
+        <td style="width:184pt"><p class="s3"
+                                   style="padding-top: 5pt;padding-left: 24pt;text-indent: 0pt;text-align: left;">
+                Overtime Period</p></td>
+    </tr>
+    <tr style="height:24pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
+                Comments</p></td>
+        <td style="width:184pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+    </tr>
+    <tr style="height:21pt">
+        <td style="width:148pt"><p class="s7"
+                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;line-height: 14pt;text-align: left;">
+                Time Totals</p></td>
+        <td style="width:184pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+    </tr>
+    <tr style="height:13pt">
+        <td style="width:148pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+        <td style="width:184pt"><p class="s8"
+                                   style="padding-left: 98pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                Reported Time</p></td>
+
+    </tr>
+    <tr style="height:13pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                Reported Hours</p></td>
+        <td style="width:184pt"><p class="s4"
+                                   style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                <%= totalRegHrs %></p></td>
+    </tr>
+    <tr style="height:13pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                Absence Hours</p></td>
+        <td style="width:184pt"><p class="s4"
+                                   style="padding-left: 24pt;padding-right: 6pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                0</p></td>
+    </tr>
+</table>
+<p style="text-indent: 0pt;text-align: left;"><br/></p>
+<table style="border-collapse:collapse;margin-left:6.35pt" cellspacing="0">
+    <tr style="height:37pt">
+        <td style="width:183pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"><p
+                    class="s7" style="padding-left: 5pt;text-indent: 0pt;line-height: 15pt;text-align: left;">Reported
+                Time
+                by Entry Date</p></td>
+        <td style="width:296pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+            colspan="2"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+    </tr>
+    <% timecardGridObject.forEach((week, weekIndex) => { let weekNumber = weekIndex + 1; let [days, regularHours,
+        extraHours, totalHours] = week; %>
+    <% const renderCell = (hours, index) => { %>
+        <tr style="height:13pt">
+            <td style="width:183pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s8"
+                                                                                                            style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                    <%= dayjs().set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).set('date', days[index]).format('MMM-DD-YYYY') %></p>
+            </td>
+            <td style="width:97pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p
+                        style="text-indent: 0pt;text-align: left;"><br/></p></td>
+            <td style="width:199pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s4"
+                                                                                                            style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                    <%= days[index] !== 0 ? parseInt(hours[index]).toFixed(2) : "" %> Hours</p></td>
+        </tr>
+        <tr style="height:12pt">
+            <td style="width:183pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p class="s9"
+                                     style="padding-left: 5pt;text-indent: 0pt;line-height: 11pt;text-align: left;">Time
+                    Type</p></td>
+            <td style="width:97pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p class="s9"
+                                     style="padding-left: 8pt;text-indent: 0pt;line-height: 11pt;text-align: left;">
+                    Regularization</p></td>
+            <td style="width:199pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+        </tr>
+    <% } %>
+    <% const renderRow = (hoursArray) => { %>
+        <% hoursArray.forEach((hours, index) => {
+            const date = dayjs().set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).set('date', days[index]).get('day')
+            return days[index] && hours && date !== 6 && date !== 0 ? renderCell(hoursArray, index) : ""
+        }) %>
+
+    <% } %>
+    <% renderRow(regularHours, "#00B0F0") %>
+    <% }) %>
+</table>
+<p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br/></p>
+</body>
+</html>
