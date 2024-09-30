@@ -123,7 +123,7 @@ export const TimeSheetResolvers = {
             contact = contact.slice(0, 3) + "-" + contact.slice(3, 6) + "-" + contact.slice(6)
             const data = {
                 invoiceNo: invoiceNumber,
-                cdLabel: dayjs().tz("America/Toronto").format('MM/DD/YYYY'),
+                cdLabel: dayjs().format('MM/DD/YYYY'),
                 toCompanyName: vendor.name,
                 toAdrs1: vendor.addressLine1,
                 toAdrs2: vendor.addressLine2,
