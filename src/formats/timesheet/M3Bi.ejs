@@ -120,9 +120,9 @@
     <p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Period <span
                 style=" color: #000;">
             <% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).format('MMM-DD-YYYY') %>
-            > -
+             -
             <% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).endOf('month').format('MMM-DD-YYYY') %>
-            > </span>Person Number <span
+             </span>Person Number <span
                 style=" color: #000;"><%= cid %></span></p></div>
 <p style="padding-left: 6pt;text-indent: 0pt;text-align: left;"/>
 <p style="padding-top: 4pt;text-indent: 0pt;text-align: left;"><br/></p>
