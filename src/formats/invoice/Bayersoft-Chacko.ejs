@@ -95,14 +95,14 @@
     <div class="header">
         <div class="company-details">
             <p><strong>Bayersoft INC</strong></p>
-            <p>9073 Sutphin BLVD.</p>
+            <p>9073 Sutphin blvd</p>
             <p>Jamaica, NY 11435</p>
             <p>chackochristophersatya@gmail.com</p>
         </div>
         <div class="invoice-details">
             <p><strong>INVOICE</strong></p>
             <p>Date: <%= cdLabel%></p>
-            <p>Invoice No: <%= invoiceNo.toString().padStart(4, "0")%></p>
+            <p>Invoice No: <%= invoiceNo %></p>
         </div>
     </div>
 
@@ -118,7 +118,7 @@
             <p><%= toAdrs3%></p>
         </div>
         <div>
-            Due on <%= ddLabel %>
+            Due on <%= ddLabel2 %>
         </div>
     </div>
 
@@ -135,16 +135,10 @@
             </thead>
             <tbody>
             <tr>
-                <td>Working Hours</td>
-                <td style="text-align: right"><%= totalRegHrs %></td>
+                <td>Hours worked</td>
+                <td style="text-align: right"><%= totalRegHrs+totalExtraHrs %></td>
                 <td style="text-align: right"><%= rate %></td>
-                <td style="text-align: right"><%= regularHrAmt %></td>
-            </tr>
-            <tr>
-                <td>Overtime Hours</td>
-                <td style="text-align: right"><%= totalExtraHrs %></td>
-                <td style="text-align: right"><%= extraRate %></td>
-                <td style="text-align: right"><%= overtimeHrAmt %></td>
+                <td style="text-align: right"><%= totalAmt %></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
