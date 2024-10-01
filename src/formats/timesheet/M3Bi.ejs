@@ -118,7 +118,11 @@
         Time Card</p>
     <p class="s2" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;"><%= employeeName %></p>
     <p class="s3" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Period <span
-                style=" color: #000;"><% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).format('MMM-DD-YYYY') %>> - <% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).endOf('month').format('MMM-DD-YYYY') %>> </span>Person Number <span
+                style=" color: #000;">
+            <% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).format('MMM-DD-YYYY') %>
+            > -
+            <% dayjs().set('date', 1).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).endOf('month').format('MMM-DD-YYYY') %>
+            > </span>Person Number <span
                 style=" color: #000;"><%= cid %></span></p></div>
 <p style="padding-left: 6pt;text-indent: 0pt;text-align: left;"/>
 <p style="padding-top: 4pt;text-indent: 0pt;text-align: left;"><br/></p>
@@ -148,10 +152,13 @@
     <tr style="height:24pt">
         <td style="width:148pt"><p class="s3"
                                    style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
-                Overtime Day Start Time</p></td>
-        <td style="width:184pt"><p class="s3"
-                                   style="padding-top: 5pt;padding-left: 24pt;text-indent: 0pt;text-align: left;">
                 Overtime Period</p></td>
+
+    </tr>
+    <tr style="height:24pt">
+        <td style="width:148pt"><p class="s4"
+                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
+                <%= totalExtraHrs %></p></td>
     </tr>
     <tr style="height:24pt">
         <td style="width:148pt"><p class="s3"
@@ -178,7 +185,23 @@
                 Reported Hours</p></td>
         <td style="width:184pt"><p class="s4"
                                    style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                <%= totalHrs %></p></td>
+    </tr>
+    <tr style="height:13pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                Regular Hours</p></td>
+        <td style="width:184pt"><p class="s4"
+                                   style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
                 <%= totalRegHrs %></p></td>
+    </tr>
+    <tr style="height:13pt">
+        <td style="width:148pt"><p class="s3"
+                                   style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                Overtime Hours</p></td>
+        <td style="width:184pt"><p class="s4"
+                                   style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                <%= totalExtraHrs %></p></td>
     </tr>
     <tr style="height:13pt">
         <td style="width:148pt"><p class="s3"
@@ -201,7 +224,7 @@
     </tr>
     <% timecardGridObject.forEach((week, weekIndex) => { let weekNumber = weekIndex + 1; let [days, regularHours,
         extraHours, totalHours] = week; %>
-    <% const renderCell = (hours, index) => { %>
+    <% const renderCell = (hours, hours2, index) => { %>
         <tr style="height:13pt">
             <td style="width:183pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s8"
                                                                                                             style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
@@ -209,9 +232,11 @@
             </td>
             <td style="width:97pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p
                         style="text-indent: 0pt;text-align: left;"><br/></p></td>
-            <td style="width:199pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s4"
-                                                                                                            style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
-                    <%= days[index] !== 0 ? parseInt(hours[index]).toFixed(2) : "" %> Hours</p></td>
+            <td style="width:199pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE">
+                <p class="s4" style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                    <%= days[index] !== 0 ? parseInt(hours[index]).toFixed(2) : "" %> Hours
+                </p>
+            </td>
         </tr>
         <tr style="height:12pt">
             <td style="width:183pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
@@ -223,17 +248,33 @@
                                      style="padding-left: 8pt;text-indent: 0pt;line-height: 11pt;text-align: left;">
                     Regularization</p></td>
             <td style="width:199pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
-                bgcolor="#F1F1F1"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
+                bgcolor="#F1F1F1"><p
+                        style="text-indent: 0pt;text-align: left;"><%= days[index] !== 0 ? parseInt(hours[index]).toFixed(2) : "" %>
+                    Hours</p></td>
+        </tr>
+        <tr style="height:12pt">
+            <td style="width:183pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p class="s9"
+                                     style="padding-left: 5pt;text-indent: 0pt;line-height: 11pt;text-align: left;">Time
+                    Type</p></td>
+            <td style="width:97pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p class="s9"
+                                     style="padding-left: 8pt;text-indent: 0pt;line-height: 11pt;text-align: left;">
+                    Overtime</p></td>
+            <td style="width:199pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#BEBEBE"
+                bgcolor="#F1F1F1"><p
+                        style="text-indent: 0pt;text-align: left;"><%= days[index] !== 0 ? parseInt(hours2[index]).toFixed(2) : "" %>
+                    Hours</p></td>
         </tr>
     <% } %>
-    <% const renderRow = (hoursArray) => { %>
+    <% const renderRow = (hoursArray, hoursArray2) => { %>
         <% hoursArray.forEach((hours, index) => {
             const date = dayjs().set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).get('day')
-            return days[index] && hours && date !== 6 && date !== 0 ? renderCell(hoursArray, index) : ""
+            return days[index] && (hours || hoursArray2[index]) && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2, index) : ""
         }) %>
 
     <% } %>
-    <% renderRow(regularHours, "#00B0F0") %>
+    <% renderRow(regularHours, extraHours, "#00B0F0") %>
     <% }) %>
 </table>
 <p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br/></p>
