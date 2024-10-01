@@ -152,17 +152,6 @@
     <tr style="height:24pt">
         <td style="width:148pt"><p class="s3"
                                    style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
-                Overtime Period</p></td>
-
-    </tr>
-    <tr style="height:24pt">
-        <td style="width:148pt"><p class="s4"
-                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
-                <%= totalExtraHrs %></p></td>
-    </tr>
-    <tr style="height:24pt">
-        <td style="width:148pt"><p class="s3"
-                                   style="padding-top: 5pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
                 Comments</p></td>
         <td style="width:184pt"><p style="text-indent: 0pt;text-align: left;"><br/></p></td>
     </tr>
@@ -199,9 +188,10 @@
         <td style="width:148pt"><p class="s3"
                                    style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
                 Overtime Hours</p></td>
-        <td style="width:184pt"><p class="s4"
-                                   style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
-                <%= totalExtraHrs %></p></td>
+        <td style="width:184pt">
+            <p class="s4" style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                <%= totalExtraHrs %>
+            </p></td>
     </tr>
     <tr style="height:13pt">
         <td style="width:148pt"><p class="s3"
@@ -267,14 +257,14 @@
                     Hours</p></td>
         </tr>
     <% } %>
-    <% const renderRow = (hoursArray, hoursArray2,hoursArray3) => { %>
+    <% const renderRow = (hoursArray, hoursArray2, hoursArray3) => { %>
         <% hoursArray.forEach((hours, index) => {
             const date = dayjs().set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).get('day')
-            return days[index] && hoursArray3[index] && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2,hoursArray3, index) : ""
+            return days[index] && hoursArray3[index] && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2, hoursArray3, index) : ""
         }) %>
 
     <% } %>
-    <% renderRow(regularHours, extraHours,totalHours, "#00B0F0") %>
+    <% renderRow(regularHours, extraHours, totalHours, "#00B0F0") %>
     <% }) %>
 </table>
 <p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br/></p>
