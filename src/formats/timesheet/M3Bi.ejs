@@ -224,7 +224,7 @@
     </tr>
     <% timecardGridObject.forEach((week, weekIndex) => { let weekNumber = weekIndex + 1; let [days, regularHours,
         extraHours, totalHours] = week; %>
-    <% const renderCell = (hours, hours2, index) => { %>
+    <% const renderCell = (hours, hours2, hours3, index) => { %>
         <tr style="height:13pt">
             <td style="width:183pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s8"
                                                                                                             style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
@@ -234,7 +234,7 @@
                         style="text-indent: 0pt;text-align: left;"><br/></p></td>
             <td style="width:199pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE">
                 <p class="s4" style="padding-left: 24pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
-                    <%= days[index] !== 0 ? parseInt(hours[index]).toFixed(2) : "" %> Hours
+                    <%= days[index] !== 0 ? parseInt(hours3[index]).toFixed(2) : "" %> Hours
                 </p>
             </td>
         </tr>
@@ -267,14 +267,14 @@
                     Hours</p></td>
         </tr>
     <% } %>
-    <% const renderRow = (hoursArray, hoursArray2) => { %>
+    <% const renderRow = (hoursArray, hoursArray2,hoursArray3) => { %>
         <% hoursArray.forEach((hours, index) => {
             const date = dayjs().set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).get('day')
-            return days[index] && (hours || hoursArray2[index]) && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2, index) : ""
+            return days[index] && hoursArray3[index] && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2,hoursArray3, index) : ""
         }) %>
 
     <% } %>
-    <% renderRow(regularHours, extraHours, "#00B0F0") %>
+    <% renderRow(regularHours, extraHours,totalHours, "#00B0F0") %>
     <% }) %>
 </table>
 <p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br/></p>
