@@ -141,6 +141,12 @@
                 <td style="text-align: right"><%= regularHrAmt %></td>
             </tr>
             <tr>
+                <td>Overtime Hours</td>
+                <td style="text-align: right"><%= totalExtraHrs %></td>
+                <td style="text-align: right"><%= extraRate %></td>
+                <td style="text-align: right"><%= overtimeHrAmt %></td>
+            </tr>
+            <tr>
                 <td>&nbsp;</td>
                 <td></td>
                 <td></td>
@@ -185,16 +191,16 @@
                         <p>Total:&nbsp;</p>
                     </div>
                     <div>
-                        <p>$<%= regularHrAmt %></p>
+                        <p>$<%= totalAmt %></p>
                         <p>$0.00</p>
-                        <p>$<%= regularHrAmt %>0</p>
+                        <p>$<%= totalAmt %>0</p>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Balance -->
         <div class="balance">
-            Balance Due: $<%= regularHrAmt %>
+            Balance Due: $<%= totalAmt %>
         </div>
     </div>
 
