@@ -173,7 +173,7 @@
                                    style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
                 Reported Hours</p></td>
         <td style="width:184pt"><p class="s4"
-                                   style="padding-left: 26pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                                   style="padding-left: 28pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
                 <%= totalHrs %></p></td>
     </tr>
     <tr style="height:13pt">
@@ -181,7 +181,7 @@
                                    style="padding-left: 2pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
                 Regular Hours</p></td>
         <td style="width:184pt"><p class="s4"
-                                   style="padding-left: 26pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
+                                   style="padding-left: 28pt;text-indent: 0pt;line-height: 12pt;text-align: center;">
                 <%= totalRegHrs %></p></td>
     </tr>
     <tr style="height:13pt">
@@ -259,8 +259,7 @@
     <% } %>
     <% const renderRow = (hoursArray, hoursArray2, hoursArray3) => { %>
         <% hoursArray.forEach((hours, index) => {
-            const date = dayjs().set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).get('day')
-            return days[index] && hoursArray3[index] && date !== 6 && date !== 0 ? renderCell(hoursArray, hoursArray2, hoursArray3, index) : ""
+            return days[index] && hoursArray3[index] ? renderCell(hoursArray, hoursArray2, hoursArray3, index) : ""
         }) %>
 
     <% } %>
