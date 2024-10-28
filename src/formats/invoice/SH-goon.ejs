@@ -1,0 +1,147 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Invoice</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        .header {
+            font-family: Ariel, cursive;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url("/src/media/bg.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 21cm;
+            min-height: 29.7cm;
+        }
+
+        tr:first-child {
+            background-color: rgb(37, 105, 175);
+            color: white;
+        }
+
+        th, td {
+            text-align: right;
+        }
+
+        th:first-child, th:nth-child(2), td:first-child, td:nth-child(2) {
+            text-align: left;
+        }
+
+        td, th {
+            padding: 0.5rem 0.5rem;
+        }
+
+        .text-blue {
+            color: rgb(37, 105, 175)
+        }
+
+        .font-medium-2 {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="pt-28 px-12">
+
+<div>
+    <h2 class="text-3xl text-blue font-bold header">SH Technology Solutions LLC</h2>
+    <div>
+        8 The Green, Suite R
+    </div>
+    <div>
+        Dover, DE 19901
+    </div>
+</div>
+<div class="flex justify-between mt-12">
+    <div class="flex-1">
+        <p class="text-blue font-medium-2">Bill To</p>
+        <div>
+            <div><%= toCompanyName%></div>
+            <div><%= toAdrs1%></div>
+            <div><%= toAdrs2%></div>
+            <div><%= toAdrs3%></div>
+        </div>
+    </div>
+    <div class="grid grid-cols-2">
+        <div class="text-blue font-medium-2">Invoice #</div>
+        <div>SH-<%= invoiceNo %></div>
+        <div class="text-blue font-medium-2">Invoice Date</div>
+        <div><%= cdLabel %></div>
+        <div class="text-blue font-medium-2">Due Date</div>
+        <div><%= ddLabel2 %></div>
+    </div>
+</div>
+<table class="w-full mt-6">
+    <tr>
+        <th>
+            Qty
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Unit Price
+        </th>
+        <th>
+            Total
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <%= totalRegHrs %>
+        </td>
+        <td>
+            Working Hours
+        </td>
+        <td>
+            <%= rate %>
+        </td>
+        <td>
+            <%= regularHrAmt %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <%= totalExtraHrs %>
+        </td>
+        <td>
+            Overtime
+        </td>
+        <td>
+            <%= extraRate %>
+        </td>
+        <td>
+            <%= overtimeHrAmt %>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="font-bold">Subtotal</td>
+        <td><%= totalAmt %></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="font-bold">Tax</td>
+        <td>0.00</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="font-bold text-blue text-lg">Invoice Total</td>
+        <td class="text-lg">$<%= totalAmt %></td>
+
+    </tr>
+</table>
+</body>
+</html>

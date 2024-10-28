@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Invoice</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            width: 21cm;
+            min-height: 29.7cm;
+        }
+
+        .dueContainer {
+            background: rgb(38, 113, 137);
+        }
+
+        .totalContainer{
+            background-color: rgb(211, 231, 241);
+        }
+
+        tr:first-child {
+            background-color: rgb(211, 231, 241);
+            border-bottom: #000000 2px solid;
+        }
+
+        th, td {
+            text-align: right;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+            width: 45%;
+        }
+
+        td, th {
+            padding: 0.5rem 0.5rem;
+        }
+
+        .text-blue {
+            color: rgb(38, 113, 137)
+        }
+        .text-dark-blue {
+            color: rgb(49, 67, 73)
+        }
+
+    </style>
+</head>
+<body class="">
+<div class="flex">
+    <div class="flex-1 pt-6 pl-6">
+        <h1 class="text-3xl mb-6">Invoice</h1>
+        <p class="text-blue text-xl">SG Tech Services LLC</p>
+        <div>8 The Green, Suite R</div>
+        <div>Dover, DE 19901</div>
+    </div>
+    <div class="flex-1 dueContainer text-white grid place-items-center">
+        <div>
+            <p class="text-xs">BALANCE DUE</p>
+            <h1 class="text-3xl">$<%= totalAmt %></h1>
+        </div>
+    </div>
+</div>
+<div class="flex justify-between mt-12 px-6">
+    <div class="flex-1">
+        <p>Bill To</p>
+        <div>
+            <div class="font-bold text-lg"><%= toCompanyName%></div>
+            <div><%= toAdrs1%></div>
+            <div><%= toAdrs2%></div>
+            <div><%= toAdrs3%></div>
+        </div>
+    </div>
+    <div>
+        <div class="grid grid-cols-2">
+            <div class="font-bold text-right pr-2">INVOICE #</div>
+            <div>: SG-<%= invoiceNo %></div>
+            <div class="font-bold text-right pr-2">DATE</div>
+            <div>: <%= cdLabel %></div>
+            <div class="font-bold text-right pr-2">DUE DATE</div>
+            <div>: <%= ddLabel2 %></div>
+        </div>
+    </div>
+</div>
+<table class="w-full mt-6">
+    <tr>
+        <th class="capitalize">
+            Description
+        </th>
+        <th class="capitalize">
+            Quantity
+        </th>
+        <th class="capitalize">
+            Rate
+        </th>
+        <th class="capitalize">
+            Amount
+        </th>
+    </tr>
+    <tr>
+        <td>
+            Working Hours
+        </td>
+        <td>
+            <%= totalRegHrs %>
+        </td>
+        <td>
+            <%= rate %>
+        </td>
+        <td>
+            <%= regularHrAmt %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Overtime
+        </td>
+        <td>
+            <%= totalExtraHrs %>
+        </td>
+        <td>
+            <%= extraRate %>
+        </td>
+        <td>
+            <%= overtimeHrAmt %>
+        </td>
+    </tr>
+    <tr class="border-b-2 border-black">
+        <td colspan="4" class="h-12"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="font-bold">SUB-TOTAL</td>
+        <td><%= totalAmt %></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="font-bold">TAX</td>
+        <td>0.00</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" class="font-bold text-lg totalContainer text-dark-blue" style="border-top: rgb(49, 67, 73) 2px solid">TOTAL</td>
+        <td class="text-lg totalContainer text-dark-blue" style="border-top: rgb(49, 67, 73) 2px solid">$<%= totalAmt %></td>
+
+    </tr>
+</table>
+</body>
+</html>
