@@ -233,7 +233,7 @@
         <tr style="height:13pt">
             <td style="width:183pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p class="s8"
                                                                                                             style="padding-left: 5pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
-                    <%= dayjs().set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).set('month', month).format('MMM-DD-YYYY') %></p>
+                    <%= dayjs().set('month', month).set('date', days[index]).set('year', 2000 + parseInt(monthLabel.split("'")[1])).format('MMM-DD-YYYY') %></p>
             </td>
             <td style="width:97pt;border-top-style:solid;border-top-width:1pt;border-top-color:#BEBEBE"><p
                         style="text-indent: 0pt;text-align: left;"><br/></p></td>
